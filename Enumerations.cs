@@ -20,22 +20,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace IncreBuild {
-	class Program {
-		[STAThread]
-		static void Main(string[] args) {
-			Dictionary<ArgumentType, string> ArgList = ArgumentParser.ParseArguments(args);
-			if (ArgList.Count == 0 || ArgList.ContainsKey(ArgumentType.Options)) {
-				// No Arguments or the "/options" argument exists.
-				// Don't run anything, display the configuration interface.
-				Application OptionsApp = new Application();
-				OptionsApp.Run(new OptionsWindow());
-			} else {
-				Console.WriteLine("[[ PLACEHOLDER FOR APPLICATION LOGIC ]]");
-			}
-			//Console.ReadLine();
-		}
+	/// <summary>
+	/// Contains type definitions for command line arguments.
+	/// </summary>
+	public enum ArgumentType {
+		/// <summary>
+		/// Corresponds to the "/releasetype" option.
+		/// </summary>
+		ReleaseType,
+		/// <summary>
+		/// Corresponds to the "/projectdir" option.
+		/// </summary>
+		ProjectDir,
+		/// <summary>
+		/// Corresponds to the "/options" option.
+		/// </summary>
+		Options
 	}
+
 }
