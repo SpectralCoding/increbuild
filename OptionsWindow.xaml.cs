@@ -54,7 +54,13 @@ namespace IncreBuild {
 		}
 
 		private void AddBuildConfigBtn_Click(object sender, RoutedEventArgs e) {
+			InputBox AddInputBox = new InputBox();
+			AddInputBox.RaiseCustomEvent += new EventHandler<InputBoxEventArgs>(InputBox_RaiseCustomEvent);
+			AddInputBox.Show();
+		}
 
+		void InputBox_RaiseCustomEvent(object sender, InputBoxEventArgs e) {
+			Console.WriteLine(e.InputText);
 		}
 	}
 }
