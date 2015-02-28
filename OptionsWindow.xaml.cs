@@ -45,5 +45,16 @@ namespace IncreBuild {
 		private void SaveAndCloseBtn_Click(object sender, RoutedEventArgs e) {
 			Console.WriteLine("BOO!");
 		}
+
+		private void Window_Loaded(object sender, RoutedEventArgs e) {
+			foreach (KeyValuePair<String, BuildConfiguration> kVP in Config.Instance.BuildConfigs) {
+				BuildConfigCombo.Items.Add(kVP.Key);
+			}
+			BuildConfigCombo.SelectedIndex = 0;
+		}
+
+		private void AddBuildConfigBtn_Click(object sender, RoutedEventArgs e) {
+
+		}
 	}
 }
