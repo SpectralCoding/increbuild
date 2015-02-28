@@ -1,4 +1,4 @@
-﻿/// <copyright file="Program.cs" company="SpectralCoding.com">
+﻿/// <copyright file="BuildConfiguration.cs" company="SpectralCoding.com">
 ///     Copyright (c) 2015 SpectralCoding
 /// </copyright>
 /// <license>
@@ -23,28 +23,17 @@ namespace IncreBuild {
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
+	using System.Runtime.Serialization;
 	using System.Text;
 	using System.Threading.Tasks;
-	using System.Windows;
 
-	public class Program {
-		[STAThread]
-		private static void Main(String[] args) {
-			Dictionary<ArgumentType, String> argList = ArgumentParser.ParseArguments(args);
-			if (argList.ContainsKey(ArgumentType.LoadConfig)) {
-				Config.Load(argList[ArgumentType.LoadConfig]);
-			} else {
-				Config.Load(@"IncreBuild.xml");
-			}
-			if (argList.Count == 0 || argList.ContainsKey(ArgumentType.Options)) {
-				// No Arguments or the "/options" argument exists.
-				// Don't run anything, display the configuration interface.
-				Application optionsApp = new Application();
-				optionsApp.Run(new OptionsWindow());
-			} else {
-				Console.WriteLine("[[ PLACEHOLDER FOR APPLICATION LOGIC ]]");
-			}
-			////Console.ReadLine();
+	[DataContract]
+	public class BuildConfiguration {
+		[DataMember]
+		private Dictionary<VersionComponent, BuildAction> m_buildActions = new Dictionary<VersionComponent, BuildAction>();
+
+		public Dictionary<VersionComponent, BuildAction> BuildActions {
+			get { return this.m_buildActions; }
 		}
 	}
 }
