@@ -1,4 +1,4 @@
-﻿/// <copyright file="Config.cs" company="SpectralCoding.com">
+﻿/// <copyright file="ObjectBase.cs" company="SpectralCoding.com">
 ///     Copyright (c) 2015 SpectralCoding
 /// </copyright>
 /// <license>
@@ -19,19 +19,29 @@
 /// </license>
 /// <author>Caesar Kabalan</author>
 
-namespace IncreBuild.Configuration {
+namespace IncreBuild.Support {
 	using System;
 	using System.Collections.Generic;
-	using System.IO;
 	using System.Linq;
-	using System.Runtime.Serialization;
 	using System.Text;
 	using System.Threading.Tasks;
-	using System.Xml;
-	using System.Xml.Serialization;
-	using IncreBuild.Support;
+	using System.ComponentModel;
+	using System.Runtime.CompilerServices;
 
-	public class Config {
-		public Boolean Configured;
+	public class ObjectBase : INotifyPropertyChanged {
+		#region WPF Binding Property Notification
+		public event PropertyChangedEventHandler PropertyChanged;
+		protected virtual void OnPropertyChanged(string propertyName) {
+			PropertyChangedEventHandler handler = PropertyChanged;
+			if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+		}
+		protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null) {
+			if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+			field = value;
+			OnPropertyChanged(propertyName);
+			return true;
+		}
+		#endregion
+
 	}
 }

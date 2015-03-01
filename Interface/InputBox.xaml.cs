@@ -34,6 +34,7 @@ namespace IncreBuild.Interface {
 	using System.Windows.Media.Imaging;
 	using System.Windows.Shapes;
 	using IncreBuild.Configuration;
+	using IncreBuild.ViewModels;
 
 	/// <summary>
 	/// Interaction logic for InputBox.xaml
@@ -48,7 +49,7 @@ namespace IncreBuild.Interface {
 		private void OKBtn_Click(object sender, RoutedEventArgs e) {
 			InputFieldTxt.Text = InputFieldTxt.Text.Trim();
 			if (InputFieldTxt.Text != String.Empty) {
-				if (!Config.Instance.BuildConfigs.ContainsKey(InputFieldTxt.Text)) {
+				if (!ConfigViewModel.Instance.BuildConfigVMs.ContainsKey(InputFieldTxt.Text)) {
 					RaiseCustomEvent(this, new InputBoxEventArgs(InputFieldTxt.Text));
 					this.Close();
 				} else {

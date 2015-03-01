@@ -34,6 +34,8 @@ namespace IncreBuild.Interface {
 	using System.Windows.Media.Imaging;
 	using System.Windows.Shapes;
 	using IncreBuild.Configuration;
+	using IncreBuild.Support;
+	using IncreBuild.ViewModels;
 
 	/// <summary>
 	/// Interaction logic for OptionsWindow.xaml
@@ -41,6 +43,11 @@ namespace IncreBuild.Interface {
 	public partial class OptionsWindow : Window {
 		public OptionsWindow() {
 			this.InitializeComponent();
+			this.DataContext = ConfigViewModel.Instance;
+			MajorVersion.DataContext = ConfigViewModel.Instance.BuildConfigVMs[ConfigViewModel.Instance.BuildConfigVMs.Keys.First()].BuildActionVMs[VersionComponent.Major];
+			MinorVersion.DataContext = ConfigViewModel.Instance.BuildConfigVMs[ConfigViewModel.Instance.BuildConfigVMs.Keys.First()].BuildActionVMs[VersionComponent.Minor];
+			BuildVersion.DataContext = ConfigViewModel.Instance.BuildConfigVMs[ConfigViewModel.Instance.BuildConfigVMs.Keys.First()].BuildActionVMs[VersionComponent.Build];
+			RevisionVersion.DataContext = ConfigViewModel.Instance.BuildConfigVMs[ConfigViewModel.Instance.BuildConfigVMs.Keys.First()].BuildActionVMs[VersionComponent.Revision];
 		}
 
 		private void SaveAndCloseBtn_Click(object sender, RoutedEventArgs e) {
@@ -48,7 +55,7 @@ namespace IncreBuild.Interface {
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e) {
-			foreach (KeyValuePair<String, BuildConfiguration> kVP in Config.Instance.BuildConfigs) {
+			foreach (KeyValuePair<String, BuildConfigurationViewModel> kVP in ConfigViewModel.Instance.BuildConfigVMs) {
 				BuildConfigCombo.Items.Add(kVP.Key);
 			}
 			BuildConfigCombo.SelectedIndex = 0;
@@ -65,11 +72,8 @@ namespace IncreBuild.Interface {
 		}
 
 		private void BuildConfigCombo_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
-		}
-
-		private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
+			//Console.WriteLine(BuildConfigCombo.SelectedValue);
+			MajorVersion.DataContext = ConfigViewModel.Instance.BuildConfigVMs[BuildConfigCombo.SelectedValue.ToString()].BuildActionVMs[VersionComponent.Major];
 		}
 	}
 }

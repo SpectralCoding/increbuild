@@ -30,40 +30,7 @@ namespace IncreBuild.Configuration {
 
 	[DataContract]
 	public class BuildAction {
-		private Int32 m_delta;
-		private ActionMode m_mode;
-
-		public BuildAction(ActionMode actionMode) {
-			this.Mode = actionMode;
-		}
-
-		public BuildAction(ActionMode actionMode, Int32 actionDelta) : this(actionMode) {
-			this.Delta = actionDelta;
-		}
-
-		[DataMember]
-		public Int32 Delta {
-			get { return this.m_delta; }
-			set { this.m_delta = value; }
-		}
-
-		public String Description {
-			get {
-				// Maybe we'll use this later for a text-based description for clarity.
-				switch (this.m_mode) {
-					case ActionMode.Decrease: return String.Format("Subtract {0}", this.Delta);
-					case ActionMode.Increase: return String.Format("Add {0}", this.Delta);
-					case ActionMode.Manual: return String.Format("Do Nothing", this.Delta);
-					case ActionMode.Reset: return String.Format("Set to 0", this.Delta);
-					case ActionMode.TimeBased: return String.Format("Set to a time-based number", this.Delta);
-					default: return "Unknown Action";
-				}
-			}
-		}
-		[DataMember]
-		public ActionMode Mode {
-			get { return this.m_mode; }
-			set { this.m_mode = value; }
-		}
+		public Int32 Delta { get; set; }
+		public ActionMode Mode { get; set; }
 	}
 }
