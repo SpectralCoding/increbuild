@@ -19,7 +19,7 @@
 /// </license>
 /// <author>Caesar Kabalan</author>
 
-namespace IncreBuild {
+namespace IncreBuild.Configuration {
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
@@ -29,6 +29,7 @@ namespace IncreBuild {
 	using System.Threading.Tasks;
 	using System.Xml;
 	using System.Xml.Serialization;
+	using IncreBuild.Support;
 
 	[DataContract]
 	public sealed class Config {

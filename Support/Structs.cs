@@ -19,7 +19,7 @@
 /// </license>
 /// <author>Caesar Kabalan</author>
 
-namespace IncreBuild {
+namespace IncreBuild.Support {
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;

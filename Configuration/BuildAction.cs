@@ -19,13 +19,14 @@
 /// </license>
 /// <author>Caesar Kabalan</author>
 
-namespace IncreBuild {
+namespace IncreBuild.Configuration {
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 	using System.Runtime.Serialization;
 	using System.Text;
 	using System.Threading.Tasks;
+	using IncreBuild.Support;
 
 	[DataContract]
 	public class BuildAction {
@@ -49,7 +50,7 @@ namespace IncreBuild {
 		public String Description {
 			get {
 				// Maybe we'll use this later for a text-based description for clarity.
-				switch (this.Mode) {
+				switch (this.m_mode) {
 					case ActionMode.Decrease: return String.Format("Subtract {0}", this.Delta);
 					case ActionMode.Increase: return String.Format("Add {0}", this.Delta);
 					case ActionMode.Manual: return String.Format("Do Nothing", this.Delta);

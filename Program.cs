@@ -26,6 +26,9 @@ namespace IncreBuild {
 	using System.Text;
 	using System.Threading.Tasks;
 	using System.Windows;
+	using IncreBuild.Configuration;
+	using IncreBuild.Interface;
+	using IncreBuild.Support;
 
 	public class Program {
 		[STAThread]

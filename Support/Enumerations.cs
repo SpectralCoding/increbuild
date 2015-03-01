@@ -19,7 +19,7 @@
 /// </license>
 /// <author>Caesar Kabalan</author>
 
-namespace IncreBuild {
+namespace IncreBuild.Support {
 	/// <summary>
 	/// Contains type definitions for command line arguments.
 	/// </summary>

@@ -19,7 +19,7 @@
 /// </license>
 /// <author>Caesar Kabalan</author>
 
-namespace IncreBuild {
+namespace IncreBuild.Interface {
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
@@ -33,6 +33,7 @@ namespace IncreBuild {
 	using System.Windows.Media;
 	using System.Windows.Media.Imaging;
 	using System.Windows.Shapes;
+	using IncreBuild.Configuration;
 
 	/// <summary>
 	/// Interaction logic for OptionsWindow.xaml
@@ -55,12 +56,20 @@ namespace IncreBuild {
 
 		private void AddBuildConfigBtn_Click(object sender, RoutedEventArgs e) {
 			InputBox AddInputBox = new InputBox();
-			AddInputBox.RaiseCustomEvent += new EventHandler<InputBoxEventArgs>(InputBox_RaiseCustomEvent);
+			AddInputBox.RaiseCustomEvent += new EventHandler<InputBoxEventArgs>(InputBox_OK);
 			AddInputBox.Show();
 		}
 
-		void InputBox_RaiseCustomEvent(object sender, InputBoxEventArgs e) {
-			Console.WriteLine(e.InputText);
+		void InputBox_OK(object sender, InputBoxEventArgs e) {
+			BuildConfigCombo.Items.Add(e.InputText);
+		}
+
+		private void BuildConfigCombo_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+
+		}
+
+		private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+
 		}
 	}
 }

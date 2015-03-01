@@ -19,7 +19,7 @@
 /// </license>
 /// <author>Caesar Kabalan</author>
 
-namespace IncreBuild {
+namespace IncreBuild.Interface {
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
@@ -33,6 +33,7 @@ namespace IncreBuild {
 	using System.Windows.Media;
 	using System.Windows.Media.Imaging;
 	using System.Windows.Shapes;
+	using IncreBuild.Configuration;
 
 	/// <summary>
 	/// Interaction logic for InputBox.xaml

@@ -21,7 +21,7 @@ along with IncreBuild.  If not, see <http://www.gnu.org/licenses/>.
 <author>Caesar Kabalan</author>
 -->
 
-<Window x:Class="IncreBuild.InputBox"
+<Window x:Class="IncreBuild.Interface.InputBox"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Input Title" Height="126" Width="487" Icon="pack://application:,,,/Resources/Info.ico">
