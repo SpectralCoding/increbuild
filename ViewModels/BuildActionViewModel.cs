@@ -21,38 +21,45 @@
 
 namespace IncreBuild.ViewModels {
 	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
 	using System.Runtime.Serialization;
-	using IncreBuild.Support;
 	using IncreBuild.Configuration;
+	using IncreBuild.Support;
+
+	[DataContract]
 	public class BuildActionViewModel : ViewModelBase {
 		private BuildAction m_buildAction;
+		private VersionComponent m_versionType;
 
-		public BuildActionViewModel(ActionMode actionMode) {
-			m_buildAction = new BuildAction();
+		public BuildActionViewModel(VersionComponent versionComponent, ActionMode actionMode) {
+			this.m_buildAction = new BuildAction();
 			this.Mode = actionMode;
+			this.VersionType = versionComponent;
 		}
 
-		public BuildActionViewModel(ActionMode actionMode, Int32 actionDelta) : this(actionMode) {
+		public BuildActionViewModel(VersionComponent versionComponent, ActionMode actionMode, Int32 actionDelta)
+			: this(versionComponent, actionMode) {
 			this.Delta = actionDelta;
 		}
 
 		[DataMember]
 		public Int32 Delta {
-			get { return this.m_buildAction.Delta; }
+			get {
+				return this.m_buildAction.Delta;
+			}
+
 			set {
+				if (this.m_buildAction == null) {
+					this.m_buildAction = new BuildAction();
+				}
 				this.m_buildAction.Delta = value;
-				OnPropertyChanged("Mode");
+				this.OnPropertyChanged("Delta");
 			}
 		}
 
 		public String Description {
 			get {
 				// Maybe we'll use this later for a text-based description for clarity.
-				switch (Mode) {
+				switch (this.Mode) {
 					case ActionMode.Decrease: return String.Format("Subtract {0}", this.Delta);
 					case ActionMode.Increase: return String.Format("Add {0}", this.Delta);
 					case ActionMode.Manual: return String.Format("Do Nothing", this.Delta);
@@ -64,14 +71,29 @@ namespace IncreBuild.ViewModels {
 		}
 		[DataMember]
 		public ActionMode Mode {
-			get { return this.m_buildAction.Mode; }
+			get {
+				return this.m_buildAction.Mode;
+			}
+
 			set {
+				if (this.m_buildAction == null) {
+					this.m_buildAction = new BuildAction();
+				}
 				this.m_buildAction.Mode = value;
-				OnPropertyChanged("Mode");
+				this.OnPropertyChanged("Mode");
 			}
 		}
 
+		[DataMember]
+		public VersionComponent VersionType {
+			get {
+				return this.m_versionType;
+			}
 
-
+			set {
+				this.m_versionType = value;
+				this.OnPropertyChanged("VersionType");
+			}
+		}
 	}
 }

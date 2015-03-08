@@ -20,23 +20,24 @@
 /// <author>Caesar Kabalan</author>
 
 namespace IncreBuild.ViewModels {
-	using System;
 	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
+	using System.Runtime.Serialization;
 	using IncreBuild.Support;
+
+	[DataContract]
 	public class BuildConfigurationViewModel : ViewModelBase {
 		private Dictionary<VersionComponent, BuildActionViewModel> m_buildActionViewModels;
 
-		public Dictionary<VersionComponent, BuildActionViewModel> BuildActionVMs {
-			get { return this.m_buildActionViewModels; }
-		}
-
 		public BuildConfigurationViewModel() {
-			m_buildActionViewModels = new Dictionary<VersionComponent, BuildActionViewModel>();
+			this.m_buildActionViewModels = new Dictionary<VersionComponent, BuildActionViewModel>();
 		}
 
-
+		[DataMember]
+		public Dictionary<VersionComponent, BuildActionViewModel> BuildActionVMs {
+			get {
+				return this.m_buildActionViewModels ??
+					(this.m_buildActionViewModels = new Dictionary<VersionComponent, BuildActionViewModel>());
+			}
+		}
 	}
 }

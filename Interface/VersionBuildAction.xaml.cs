@@ -1,27 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using IncreBuild.Support;
+﻿/// <copyright file="VersionBuildAction.cs" company="SpectralCoding.com">
+///     Copyright (c) 2015 SpectralCoding
+/// </copyright>
+/// <license>
+/// This file is part of IncreBuild.
+///
+/// IncreBuild is free software: you can redistribute it and/or modify
+/// it under the terms of the GNU General Public License as published by
+/// the Free Software Foundation, either version 3 of the License, or
+/// (at your option) any later version.
+///
+/// IncreBuild is distributed in the hope that it will be useful,
+/// but WITHOUT ANY WARRANTY; without even the implied warranty of
+/// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+/// GNU General Public License for more details.
+///
+/// You should have received a copy of the GNU General Public License
+/// along with IncreBuild.  If not, see <http://www.gnu.org/licenses/>.
+/// </license>
+/// <author>Caesar Kabalan</author>
 
 namespace IncreBuild.Interface {
+	using System;
+	using System.Windows;
+	using System.Windows.Controls;
+
 	/// <summary>
 	/// Interaction logic for VersionBuildAction.xaml
 	/// </summary>
 	public partial class VersionBuildAction : UserControl {
 		public VersionBuildAction() {
-			InitializeComponent();
+			this.InitializeComponent();
 		}
 
 		private void VersionBuildAction_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e) {
@@ -29,34 +37,4 @@ namespace IncreBuild.Interface {
 			Console.WriteLine("VBA Txt DC: " + ValueTxt.DataContext);
 		}
 	}
-
-	[ValueConversion(typeof(ActionMode), typeof(String))]
-	public class ActionModeEnumToString : IValueConverter {
-		public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
-			ActionMode ActionModeEnum = (ActionMode)value;
-			switch (ActionModeEnum) {
-				case ActionMode.Decrease: return "Decrease";
-				case ActionMode.Increase: return "Increase";
-				case ActionMode.Manual: return "Do Nothing";
-				case ActionMode.Reset: return "Reset";
-				case ActionMode.TimeBased: return "Calculate";
-				default: return null;
-			}
-		}
-
-		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
-			string ActionModeStr = (string)value;
-			switch (ActionModeStr) {
-				case "Decrease": return ActionMode.Decrease;
-				case "Increase": return ActionMode.Increase;
-				case "Do Nothing": return ActionMode.Manual;
-				case "Reset": return ActionMode.Reset;
-				case "Calculate": return ActionMode.TimeBased;
-				default: return null;
-			}
-			return null;
-		}
-	}
-
-
 }

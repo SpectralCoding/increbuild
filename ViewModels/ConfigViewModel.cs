@@ -23,36 +23,19 @@ namespace IncreBuild.ViewModels {
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
-	using System.Linq;
 	using System.Runtime.Serialization;
-	using System.Text;
-	using System.Threading.Tasks;
 	using System.Xml;
-	using System.Xml.Serialization;
-	using IncreBuild.Support;
 	using IncreBuild.Configuration;
+	using IncreBuild.Support;
 
+	[DataContract]
 	public sealed class ConfigViewModel : ViewModelBase {
-
 		private Dictionary<String, BuildConfigurationViewModel> m_buildConfigurationViewModels;
 		private Config m_config;
 
-		[DataMember]
-		public Dictionary<String, BuildConfigurationViewModel> BuildConfigVMs {
-			get { return m_buildConfigurationViewModels; }
-		}
-
-		public Boolean Configured {
-			get { return m_config.Configured; }
-			set {
-				m_config.Configured = value;
-				OnPropertyChanged("Configured");
-			}
-		}
-
 		private ConfigViewModel() {
-			m_config = new Config();
-			m_buildConfigurationViewModels = new Dictionary<string, BuildConfigurationViewModel>();
+			this.m_config = new Config();
+			this.m_buildConfigurationViewModels = new Dictionary<string, BuildConfigurationViewModel>();
 		}
 
 		public static ConfigViewModel Instance {
@@ -60,12 +43,35 @@ namespace IncreBuild.ViewModels {
 			set { Nested.Instance = value; }
 		}
 
+		[DataMember]
+		public Dictionary<String, BuildConfigurationViewModel> BuildConfigVMs {
+			get {
+				return this.m_buildConfigurationViewModels ??
+					(this.m_buildConfigurationViewModels = new Dictionary<string, BuildConfigurationViewModel>());
+			}
+		}
+
+		[DataMember]
+		public Boolean Configured {
+			get {
+				return this.m_config.Configured;
+			}
+
+			set {
+				if (this.m_config == null) {
+					this.m_config = new Config();
+				}
+				this.m_config.Configured = value;
+				this.OnPropertyChanged("Configured");
+			}
+		}
+
 		/// <summary>
 		/// Saves configuration to a configuration file.
 		/// </summary>
 		/// <param name="filename">Filename to save Configuration as</param>
 		public void Save(String filename) {
-			DataContractSerializer serializer = new DataContractSerializer(typeof(Config));
+			DataContractSerializer serializer = new DataContractSerializer(typeof(ConfigViewModel));
 			using (XmlWriter configXmlW = XmlWriter.Create(filename, new XmlWriterSettings { Indent = true })) {
 				serializer.WriteObject(configXmlW, this);
 				configXmlW.Close();
@@ -80,7 +86,7 @@ namespace IncreBuild.ViewModels {
 		/// <returns>A Config object which contains configuration information.</returns>
 		internal static ConfigViewModel Load(String filename) {
 			if (File.Exists(filename)) {
-				DataContractSerializer configDcs = new DataContractSerializer(typeof(Config));
+				DataContractSerializer configDcs = new DataContractSerializer(typeof(ConfigViewModel));
 				using (StringReader configSR = new StringReader(File.ReadAllText(filename))) {
 					using (XmlReader configXmlR = XmlReader.Create(configSR)) {
 						return (ConfigViewModel)configDcs.ReadObject(configXmlR);
@@ -90,16 +96,32 @@ namespace IncreBuild.ViewModels {
 				Console.WriteLine("Configuration file nonexistant, loading default configuration.");
 				ConfigViewModel defaultCVM = new ConfigViewModel();
 				BuildConfigurationViewModel tempDebugBCVM = new BuildConfigurationViewModel();
-				tempDebugBCVM.BuildActionVMs.Add(VersionComponent.Major, new BuildActionViewModel(ActionMode.Manual));
-				tempDebugBCVM.BuildActionVMs.Add(VersionComponent.Minor, new BuildActionViewModel(ActionMode.Manual));
-				tempDebugBCVM.BuildActionVMs.Add(VersionComponent.Build, new BuildActionViewModel(ActionMode.Increase, 1));
-				tempDebugBCVM.BuildActionVMs.Add(VersionComponent.Revision, new BuildActionViewModel(ActionMode.TimeBased));
+				tempDebugBCVM.BuildActionVMs.Add(
+					VersionComponent.Major,
+					new BuildActionViewModel(VersionComponent.Major, ActionMode.Manual));
+				tempDebugBCVM.BuildActionVMs.Add(
+					VersionComponent.Minor,
+					new BuildActionViewModel(VersionComponent.Minor, ActionMode.Manual));
+				tempDebugBCVM.BuildActionVMs.Add(
+					VersionComponent.Build,
+					new BuildActionViewModel(VersionComponent.Build, ActionMode.Increase, 1));
+				tempDebugBCVM.BuildActionVMs.Add(
+					VersionComponent.Revision,
+					new BuildActionViewModel(VersionComponent.Revision, ActionMode.TimeBased));
 				defaultCVM.BuildConfigVMs.Add("Debug", tempDebugBCVM);
 				BuildConfigurationViewModel tempReleaseBC = new BuildConfigurationViewModel();
-				tempReleaseBC.BuildActionVMs.Add(VersionComponent.Major, new BuildActionViewModel(ActionMode.Manual));
-				tempReleaseBC.BuildActionVMs.Add(VersionComponent.Minor, new BuildActionViewModel(ActionMode.Increase, 1));
-				tempReleaseBC.BuildActionVMs.Add(VersionComponent.Build, new BuildActionViewModel(ActionMode.Increase, 1));
-				tempReleaseBC.BuildActionVMs.Add(VersionComponent.Revision, new BuildActionViewModel(ActionMode.TimeBased));
+				tempReleaseBC.BuildActionVMs.Add(
+					VersionComponent.Major,
+					new BuildActionViewModel(VersionComponent.Major, ActionMode.Manual));
+				tempReleaseBC.BuildActionVMs.Add(
+					VersionComponent.Minor,
+					new BuildActionViewModel(VersionComponent.Minor, ActionMode.Increase, 1));
+				tempReleaseBC.BuildActionVMs.Add(
+					VersionComponent.Build,
+					new BuildActionViewModel(VersionComponent.Build, ActionMode.Increase, 1));
+				tempReleaseBC.BuildActionVMs.Add(
+					VersionComponent.Revision,
+					new BuildActionViewModel(VersionComponent.Revision, ActionMode.TimeBased));
 				defaultCVM.BuildConfigVMs.Add("Release", tempReleaseBC);
 				return defaultCVM;
 			}
@@ -113,6 +135,5 @@ namespace IncreBuild.ViewModels {
 				set { s_instance = value; }
 			}
 		}
-
 	}
 }

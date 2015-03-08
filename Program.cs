@@ -22,11 +22,7 @@
 namespace IncreBuild {
 	using System;
 	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
 	using System.Windows;
-	using IncreBuild.Configuration;
 	using IncreBuild.Interface;
 	using IncreBuild.Support;
 	using IncreBuild.ViewModels;

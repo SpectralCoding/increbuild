@@ -1,4 +1,4 @@
-﻿/// <copyright file="Config.cs" company="SpectralCoding.com">
+﻿/// <copyright file="InputBoxEventArgs.cs" company="SpectralCoding.com">
 ///     Copyright (c) 2015 SpectralCoding
 /// </copyright>
 /// <license>
@@ -19,8 +19,18 @@
 /// </license>
 /// <author>Caesar Kabalan</author>
 
-namespace IncreBuild.Configuration {
-	public class Config {
-		public bool Configured { get; set; }
+namespace IncreBuild.Support {
+	using System;
+
+	public class InputBoxEventArgs : EventArgs {
+		private string m_inputText;
+
+		public InputBoxEventArgs(string inputText) {
+			this.m_inputText = inputText;
+		}
+
+		public string InputText {
+			get { return this.m_inputText; }
+		}
 	}
 }

@@ -23,17 +23,8 @@ namespace IncreBuild.Interface {
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
 	using System.Windows;
 	using System.Windows.Controls;
-	using System.Windows.Data;
-	using System.Windows.Documents;
-	using System.Windows.Input;
-	using System.Windows.Media;
-	using System.Windows.Media.Imaging;
-	using System.Windows.Shapes;
-	using IncreBuild.Configuration;
 	using IncreBuild.Support;
 	using IncreBuild.ViewModels;
 
@@ -44,36 +35,47 @@ namespace IncreBuild.Interface {
 		public OptionsWindow() {
 			this.InitializeComponent();
 			this.DataContext = ConfigViewModel.Instance;
-			MajorVersion.DataContext = ConfigViewModel.Instance.BuildConfigVMs[ConfigViewModel.Instance.BuildConfigVMs.Keys.First()].BuildActionVMs[VersionComponent.Major];
-			MinorVersion.DataContext = ConfigViewModel.Instance.BuildConfigVMs[ConfigViewModel.Instance.BuildConfigVMs.Keys.First()].BuildActionVMs[VersionComponent.Minor];
-			BuildVersion.DataContext = ConfigViewModel.Instance.BuildConfigVMs[ConfigViewModel.Instance.BuildConfigVMs.Keys.First()].BuildActionVMs[VersionComponent.Build];
-			RevisionVersion.DataContext = ConfigViewModel.Instance.BuildConfigVMs[ConfigViewModel.Instance.BuildConfigVMs.Keys.First()].BuildActionVMs[VersionComponent.Revision];
+			BuildConfigurationViewModel firstBCVM =
+				ConfigViewModel.Instance.BuildConfigVMs[ConfigViewModel.Instance.BuildConfigVMs.Keys.First()];
+			MajorVersion.DataContext = firstBCVM.BuildActionVMs[VersionComponent.Major];
+			MinorVersion.DataContext = firstBCVM.BuildActionVMs[VersionComponent.Minor];
+			BuildVersion.DataContext = firstBCVM.BuildActionVMs[VersionComponent.Build];
+			RevisionVersion.DataContext = firstBCVM.BuildActionVMs[VersionComponent.Revision];
 		}
 
 		private void SaveAndCloseBtn_Click(object sender, RoutedEventArgs e) {
-			Console.WriteLine("BOO!");
+			ConfigViewModel.Instance.Save("IncreBuild.xml");
+			Application.Current.Shutdown();
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e) {
-			foreach (KeyValuePair<String, BuildConfigurationViewModel> kVP in ConfigViewModel.Instance.BuildConfigVMs) {
-				BuildConfigCombo.Items.Add(kVP.Key);
+			foreach (KeyValuePair<String, BuildConfigurationViewModel> buildConfKVP in ConfigViewModel.Instance.BuildConfigVMs) {
+				BuildConfigCombo.Items.Add(buildConfKVP.Key);
 			}
 			BuildConfigCombo.SelectedIndex = 0;
 		}
 
 		private void AddBuildConfigBtn_Click(object sender, RoutedEventArgs e) {
-			InputBox AddInputBox = new InputBox();
-			AddInputBox.RaiseCustomEvent += new EventHandler<InputBoxEventArgs>(InputBox_OK);
-			AddInputBox.Show();
+			InputBox addInputBox = new InputBox();
+			addInputBox.RaiseCustomEvent += new EventHandler<InputBoxEventArgs>(this.InputBox_OK);
+			addInputBox.Show();
 		}
 
-		void InputBox_OK(object sender, InputBoxEventArgs e) {
+		private void InputBox_OK(object sender, InputBoxEventArgs e) {
 			BuildConfigCombo.Items.Add(e.InputText);
 		}
 
 		private void BuildConfigCombo_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-			//Console.WriteLine(BuildConfigCombo.SelectedValue);
-			MajorVersion.DataContext = ConfigViewModel.Instance.BuildConfigVMs[BuildConfigCombo.SelectedValue.ToString()].BuildActionVMs[VersionComponent.Major];
+			////Console.WriteLine(BuildConfigCombo.SelectedValue);
+			BuildConfigurationViewModel selectedBCVM = ConfigViewModel.Instance.BuildConfigVMs[BuildConfigCombo.SelectedValue.ToString()];
+			MajorVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Major];
+			MinorVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Minor];
+			BuildVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Build];
+			RevisionVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Revision];
+		}
+
+		private void CancelBtn_Click(object sender, RoutedEventArgs e) {
+			Application.Current.Shutdown();
 		}
 	}
 }

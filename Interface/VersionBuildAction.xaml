@@ -4,29 +4,81 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:local="clr-namespace:IncreBuild.Interface"
+			 xmlns:converters="clr-namespace:IncreBuild.Support.Converters"
              mc:Ignorable="d"
 			 Height="176"
 			 Width="110"
 			 DataContextChanged="VersionBuildAction_DataContextChanged">
 	<UserControl.Resources>
-		<local:ActionModeEnumToString x:Key="ActionModeEnumToString" />
+		<converters:ActionModeEnumToString x:Key="ActionModeEnumToString" />
+		<converters:VersionComponentEnumToString x:Key="VersionComponentEnumToString" />
 	</UserControl.Resources>
 	<Grid>
-		<Label Content="Ver Part" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Width="100" HorizontalContentAlignment="Center" FontWeight="Bold" Padding="0" Margin="5,5,0,0"/>
+		<Label Content="{Binding VersionType, Converter={StaticResource VersionComponentEnumToString}}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Width="100" HorizontalContentAlignment="Center" FontWeight="Bold" Padding="0" Margin="5,5,0,0"/>
 		<Label Content="0" HorizontalAlignment="Left" Margin="5,34,0,0" VerticalAlignment="Top" FontSize="18" Width="100" HorizontalContentAlignment="Center" Padding="0"/>
 		<ComboBox x:Name="BuildAction" HorizontalAlignment="Left" Margin="5,63,0,0" VerticalAlignment="Top" Width="100"
 				  Text="{Binding Mode, Mode=TwoWay, Converter={StaticResource ActionModeEnumToString}}"
 				  SelectedIndex="0"
 				  >
-			<ComboBoxItem Content="Increase"/>
-			<ComboBoxItem Content="Decrease"/>
-			<ComboBoxItem Content="Do Nothing"/>
-			<ComboBoxItem Content="Reset"/>
-			<ComboBoxItem Content="Calculate"/>
+			<ComboBoxItem x:Name="IncreaseCBI" Content="Increase"/>
+			<ComboBoxItem x:Name="DecreaseCBI" Content="Decrease"/>
+			<ComboBoxItem x:Name="DoNothingCBI" Content="Do Nothing"/>
+			<ComboBoxItem x:Name="ResetCBI" Content="Reset"/>
+			<ComboBoxItem x:Name="CalculateCBI" Content="Calculate"/>
 		</ComboBox>
-		<Label Content="To/Based On/By" HorizontalAlignment="Left" Margin="5,90,0,0" VerticalAlignment="Top" Padding="0" Width="100" HorizontalContentAlignment="Center"/>
-		<TextBox x:Name="ValueTxt" HorizontalAlignment="Left" Height="23" Margin="5,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" HorizontalContentAlignment="Center"/>
-		<ComboBox HorizontalAlignment="Left" Margin="5,139,0,0" VerticalAlignment="Top" Width="100"/>
-
+		<Label HorizontalAlignment="Left" Margin="5,90,0,0" VerticalAlignment="Top" Padding="0" Width="100" HorizontalContentAlignment="Center">
+			<Label.Style>
+				<Style TargetType="Label">
+					<Setter Property="Visibility" Value="Visible" />
+					<Setter Property="Content" Value="To/Based On/By" />
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding ElementName=IncreaseCBI, Path=IsSelected}" Value="True">
+							<Setter Property="Content" Value="By"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding ElementName=DecreaseCBI, Path=IsSelected}" Value="True">
+							<Setter Property="Content" Value="By"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding ElementName=DoNothingCBI, Path=IsSelected}" Value="True">
+							<Setter Property="Visibility" Value="Hidden"/>
+							<Setter Property="Content" Value=""/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding ElementName=ResetCBI, Path=IsSelected}" Value="True">
+							<Setter Property="Content" Value="To"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding ElementName=CalculateCBI, Path=IsSelected}" Value="True">
+							<Setter Property="Content" Value="Based On"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Label.Style>
+		</Label>
+		<TextBox x:Name="ValueTxt" HorizontalAlignment="Left" Height="23" Margin="5,111,0,0" TextWrapping="Wrap" Text="{Binding Delta, Mode=TwoWay}" VerticalAlignment="Top" Width="100" HorizontalContentAlignment="Center">
+			<TextBox.Style>
+				<Style TargetType="TextBox">
+					<Setter Property="Visibility" Value="Visible" />
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding ElementName=DoNothingCBI, Path=IsSelected}" Value="True">
+							<Setter Property="Visibility" Value="Hidden"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding ElementName=CalculateCBI, Path=IsSelected}" Value="True">
+							<Setter Property="Visibility" Value="Hidden"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</TextBox.Style>
+		</TextBox>
+		<ComboBox HorizontalAlignment="Left" Margin="5,111,0,0" VerticalAlignment="Top" Width="100">
+			<ComboBox.Style>
+				<Style TargetType="ComboBox">
+					<Setter Property="Visibility" Value="Hidden" />
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding ElementName=CalculateCBI, Path=IsSelected}" Value="True">
+							<Setter Property="Visibility" Value="Visible"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</ComboBox.Style>
+			<ComboBoxItem Content="Epoch"/>
+		</ComboBox>
 	</Grid>
 </UserControl>
