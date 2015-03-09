@@ -55,6 +55,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Engine\AsmInfoManipulator.cs" />
+    <Compile Include="Engine\VersionEngine.cs" />
     <Compile Include="Support\ArgumentParser.cs" />
     <Compile Include="Configuration\BuildAction.cs" />
     <Compile Include="Configuration\BuildConfiguration.cs" />

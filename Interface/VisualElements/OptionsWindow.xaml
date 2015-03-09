@@ -26,7 +26,7 @@ along with IncreBuild.  If not, see <http://www.gnu.org/licenses/>.
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:local="clr-namespace:IncreBuild.Interface.VisualElements"
         Title="IncreBuild Options"
-		Height="313.5"
+		Height="293.1"
 		Width="585"
 		Loaded="Window_Loaded"
 		Icon="pack://application:,,,/Resources/IncreBuild.ico" WindowStartupLocation="CenterScreen">
@@ -41,9 +41,17 @@ along with IncreBuild.  If not, see <http://www.gnu.org/licenses/>.
 		<Label Content="." HorizontalAlignment="Left" Margin="105,71,0,0" VerticalAlignment="Top" FontSize="18" Width="225" HorizontalContentAlignment="Center" Padding="0"/>
 		<Label Content="." HorizontalAlignment="Left" Margin="220,71,0,0" VerticalAlignment="Top" FontSize="18" Width="225" HorizontalContentAlignment="Center" Padding="0"/>
 		<Label Content="." HorizontalAlignment="Left" Margin="335,71,0,0" VerticalAlignment="Top" FontSize="18" Width="225" HorizontalContentAlignment="Center" Padding="0"/>
-		<local:VersionBuildAction x:Name="MajorVersion" Margin="105,37,0,48" HorizontalAlignment="Left" Width="110" Height="Auto" />
-		<local:VersionBuildAction x:Name="MinorVersion" Margin="220,37,0,48" HorizontalAlignment="Left" Width="110" Height="Auto" />
-		<local:VersionBuildAction x:Name="BuildVersion" Margin="335,37,0,48" HorizontalAlignment="Left" Width="110" Height="Auto" />
-		<local:VersionBuildAction x:Name="RevisionVersion" Margin="450,37,0,48" HorizontalAlignment="Left" Width="110" Height="Auto" />
+		<local:VersionBuildAction x:Name="MajorVersion" Margin="105,37,0,0" HorizontalAlignment="Left" Width="110" Height="140" VerticalAlignment="Top" />
+		<local:VersionBuildAction x:Name="MinorVersion" Margin="220,37,0,0" HorizontalAlignment="Left" Width="110" Height="140" VerticalAlignment="Top" />
+		<local:VersionBuildAction x:Name="BuildVersion" Margin="335,37,0,0" HorizontalAlignment="Left" Width="110" Height="140" VerticalAlignment="Top" />
+		<local:VersionBuildAction x:Name="RevisionVersion" Margin="450,37,0,0" HorizontalAlignment="Left" Width="110" Height="140" VerticalAlignment="Top" />
+		<Label Content="Update" HorizontalAlignment="Left" Margin="10,0,0,44" VerticalAlignment="Bottom" FontSize="18" Width="90" HorizontalContentAlignment="Center" FontWeight="Bold"/>
+		<CheckBox x:Name="checkBox" Content="AssemblyFileVersion" HorizontalAlignment="Left" Margin="109,0,0,31" VerticalAlignment="Bottom"/>
+		<CheckBox x:Name="checkBox_Copy" Content="AssemblyInformationalVersion" HorizontalAlignment="Left" Margin="109,0,0,11" Height="15" VerticalAlignment="Bottom"/>
+		<CheckBox x:Name="checkBox_Copy1" Content="AssemblyVersion" HorizontalAlignment="Left" Margin="109,0,0,51" VerticalAlignment="Bottom"/>
+		<TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="224,0,0,51" TextWrapping="Wrap" Text="Explain" VerticalAlignment="Bottom" TextDecorations="Underline" Foreground="#FF0000EE"/>
+		<TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="242,0,0,31" TextWrapping="Wrap" Text="Explain" VerticalAlignment="Bottom" TextDecorations="Underline" Foreground="#FF0000EE"/>
+		<TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="295,0,0,11" TextWrapping="Wrap" Text="Explain" VerticalAlignment="Bottom" TextDecorations="Underline" Foreground="#FF0000EE"/>
+		<Label x:Name="label" Content="" Margin="105,162,10,0" BorderThickness="0,0,0,1" BorderBrush="Black" Padding="0" Height="17" VerticalAlignment="Top"/>
 	</Grid>
 </Window>

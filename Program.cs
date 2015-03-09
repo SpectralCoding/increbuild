@@ -23,6 +23,7 @@ namespace IncreBuild {
 	using System;
 	using System.Collections.Generic;
 	using System.Windows;
+	using IncreBuild.Engine;
 	using IncreBuild.Interface.VisualElements;
 	using IncreBuild.Support;
 	using IncreBuild.ViewModels;
@@ -42,7 +43,17 @@ namespace IncreBuild {
 				Application optionsApp = new Application();
 				optionsApp.Run(new OptionsWindow());
 			} else {
-				Console.WriteLine("[[ PLACEHOLDER FOR APPLICATION LOGIC ]]");
+				if (argList.ContainsKey(ArgumentType.ProjectDir)) {
+					if (argList.ContainsKey(ArgumentType.ReleaseType)) {
+						VersionEngine versionEngine = new VersionEngine();
+						versionEngine.Run(argList[ArgumentType.ProjectDir], argList[ArgumentType.ReleaseType]);
+						Console.WriteLine("[[ PLACEHOLDER FOR APPLICATION LOGIC ]]");
+					} else {
+						Console.WriteLine("Error: No /releasetype given. Run /options or /help for more information.");
+					}
+				} else {
+					Console.WriteLine("Error: No /projectdir given. Run /options or /help for more information.");
+				}
 			}
 			////Console.ReadLine();
 		}
