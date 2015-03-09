@@ -1,4 +1,4 @@
-﻿/// <copyright file="ActionModeEnumToString.cs" company="SpectralCoding.com">
+﻿/// <copyright file="CalculationMethodEnumToString.cs" company="SpectralCoding.com">
 ///     Copyright (c) 2015 SpectralCoding
 /// </copyright>
 /// <license>
@@ -24,28 +24,21 @@ namespace IncreBuild.Support.Converters {
 	using System.Globalization;
 	using System.Windows.Data;
 
-	[ValueConversion(typeof(ActionMode), typeof(String))]
-	public class ActionModeEnumToString : IValueConverter {
+	[ValueConversion(typeof(VersionComponent), typeof(String))]
+	public class CalculationMethodEnumToString : IValueConverter {
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
-			ActionMode actionModeEnum = (ActionMode)value;
-			switch (actionModeEnum) {
-				case ActionMode.Decrease: return "Decrease";
-				case ActionMode.Increase: return "Increase";
-				case ActionMode.Manual: return "Do Nothing";
-				case ActionMode.Reset: return "Reset";
-				case ActionMode.Calculated: return "Calculate";
+			CalculationMethod calcMethodEnum = (CalculationMethod)value;
+			switch (calcMethodEnum) {
+				case CalculationMethod.DaysSinceEpoch: return "Epoch";
 				default: return null;
 			}
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
-			string actionModeStr = (string)value;
-			switch (actionModeStr) {
-				case "Decrease": return ActionMode.Decrease;
-				case "Increase": return ActionMode.Increase;
-				case "Do Nothing": return ActionMode.Manual;
-				case "Reset": return ActionMode.Reset;
-				case "Calculate": return ActionMode.Calculated;
+			// We really shouldn't even need this because it only ends up in an unchangable label.
+			string calcMethodString = (string)value;
+			switch (calcMethodString) {
+				case "Epoch": return CalculationMethod.DaysSinceEpoch;
 				default: return null;
 			}
 		}

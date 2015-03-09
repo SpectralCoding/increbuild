@@ -35,12 +35,7 @@ namespace IncreBuild.Interface {
 		public OptionsWindow() {
 			this.InitializeComponent();
 			this.DataContext = ConfigViewModel.Instance;
-			BuildConfigurationViewModel firstBCVM =
-				ConfigViewModel.Instance.BuildConfigVMs[ConfigViewModel.Instance.BuildConfigVMs.Keys.First()];
-			MajorVersion.DataContext = firstBCVM.BuildActionVMs[VersionComponent.Major];
-			MinorVersion.DataContext = firstBCVM.BuildActionVMs[VersionComponent.Minor];
-			BuildVersion.DataContext = firstBCVM.BuildActionVMs[VersionComponent.Build];
-			RevisionVersion.DataContext = firstBCVM.BuildActionVMs[VersionComponent.Revision];
+			BuildConfigCombo.SelectedIndex = 0;
 		}
 
 		private void SaveAndCloseBtn_Click(object sender, RoutedEventArgs e) {
@@ -49,33 +44,75 @@ namespace IncreBuild.Interface {
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e) {
-			foreach (KeyValuePair<String, BuildConfigurationViewModel> buildConfKVP in ConfigViewModel.Instance.BuildConfigVMs) {
-				BuildConfigCombo.Items.Add(buildConfKVP.Key);
-			}
 			BuildConfigCombo.SelectedIndex = 0;
 		}
 
 		private void AddBuildConfigBtn_Click(object sender, RoutedEventArgs e) {
-			InputBox addInputBox = new InputBox();
+			InputBox addInputBox = new InputBox("Add Build Configuration", "Enter the name of the new Build Configuration below:");
 			addInputBox.RaiseCustomEvent += new EventHandler<InputBoxEventArgs>(this.InputBox_OK);
 			addInputBox.Show();
 		}
 
 		private void InputBox_OK(object sender, InputBoxEventArgs e) {
-			BuildConfigCombo.Items.Add(e.InputText);
+			BuildConfigurationViewModel tempNewBC = new BuildConfigurationViewModel();
+			tempNewBC.BuildActionVMs.Add(
+				VersionComponent.Major,
+				new BuildActionViewModel(VersionComponent.Major, ActionMode.Manual));
+			tempNewBC.BuildActionVMs.Add(
+				VersionComponent.Minor,
+				new BuildActionViewModel(VersionComponent.Minor, ActionMode.Manual));
+			tempNewBC.BuildActionVMs.Add(
+				VersionComponent.Build,
+				new BuildActionViewModel(VersionComponent.Build, ActionMode.Manual));
+			tempNewBC.BuildActionVMs.Add(
+				VersionComponent.Revision,
+				new BuildActionViewModel(VersionComponent.Revision, ActionMode.Manual));
+			ConfigViewModel.Instance.BuildConfigVMs.Add(e.InputText, tempNewBC);
+			ConfigViewModel.Instance.BuildConfigVMsChanged();
+			for (Int32 i = 0; i < BuildConfigCombo.Items.Count; i++) {
+				Console.WriteLine(((KeyValuePair<String, BuildConfigurationViewModel>)BuildConfigCombo.Items[i]).Key);
+				if (((KeyValuePair<String, BuildConfigurationViewModel>)BuildConfigCombo.Items[i]).Key == e.InputText) {
+					BuildConfigCombo.SelectedIndex = i;
+					////break;
+				}
+			}
 		}
 
 		private void BuildConfigCombo_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 			////Console.WriteLine(BuildConfigCombo.SelectedValue);
-			BuildConfigurationViewModel selectedBCVM = ConfigViewModel.Instance.BuildConfigVMs[BuildConfigCombo.SelectedValue.ToString()];
-			MajorVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Major];
-			MinorVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Minor];
-			BuildVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Build];
-			RevisionVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Revision];
+			if (BuildConfigCombo.SelectedValue != null) {
+				BuildConfigurationViewModel selectedBCVM =
+					ConfigViewModel.Instance.BuildConfigVMs[BuildConfigCombo.SelectedValue.ToString()];
+				MajorVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Major];
+				MinorVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Minor];
+				BuildVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Build];
+				RevisionVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Revision];
+			} else {
+				MajorVersion.DataContext = null;
+				MinorVersion.DataContext = null;
+				BuildVersion.DataContext = null;
+				RevisionVersion.DataContext = null;
+			}
 		}
 
 		private void CancelBtn_Click(object sender, RoutedEventArgs e) {
 			Application.Current.Shutdown();
+		}
+
+		private void DeleteBuildConfigBtn_Click(object sender, RoutedEventArgs e) {
+			String configToDelete = BuildConfigCombo.SelectedValue.ToString();
+			BuildConfigCombo.SelectedIndex = 0;
+			ConfigViewModel.Instance.BuildConfigVMs.Remove(configToDelete);
+			BuildConfigCombo.DataContext = null;
+			BuildConfigCombo.DataContext = ConfigViewModel.Instance;
+			BuildConfigCombo.SelectedIndex = 0;
+			ConfigViewModel.Instance.BuildConfigVMsChanged();
+		}
+
+		private void ResetToDefaultsBtn_Click(object sender, RoutedEventArgs e) {
+			ConfigViewModel.Instance = ConfigViewModel.DefaultContents();
+			this.DataContext = ConfigViewModel.Instance;
+			BuildConfigCombo.SelectedIndex = 0;
 		}
 	}
 }

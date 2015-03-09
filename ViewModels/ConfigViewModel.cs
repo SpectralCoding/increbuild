@@ -49,6 +49,11 @@ namespace IncreBuild.ViewModels {
 				return this.m_buildConfigurationViewModels ??
 					(this.m_buildConfigurationViewModels = new Dictionary<string, BuildConfigurationViewModel>());
 			}
+
+			set {
+				this.m_buildConfigurationViewModels = value;
+				this.OnPropertyChanged("BuildConfigVMs");
+			}
 		}
 
 		[DataMember]
@@ -64,6 +69,10 @@ namespace IncreBuild.ViewModels {
 				this.m_config.Configured = value;
 				this.OnPropertyChanged("Configured");
 			}
+		}
+
+		public void BuildConfigVMsChanged() {
+			this.OnPropertyChanged("BuildConfigVMs");
 		}
 
 		/// <summary>
@@ -94,37 +103,41 @@ namespace IncreBuild.ViewModels {
 				}
 			} else {
 				Console.WriteLine("Configuration file nonexistant, loading default configuration.");
-				ConfigViewModel defaultCVM = new ConfigViewModel();
-				BuildConfigurationViewModel tempDebugBCVM = new BuildConfigurationViewModel();
-				tempDebugBCVM.BuildActionVMs.Add(
-					VersionComponent.Major,
-					new BuildActionViewModel(VersionComponent.Major, ActionMode.Manual));
-				tempDebugBCVM.BuildActionVMs.Add(
-					VersionComponent.Minor,
-					new BuildActionViewModel(VersionComponent.Minor, ActionMode.Manual));
-				tempDebugBCVM.BuildActionVMs.Add(
-					VersionComponent.Build,
-					new BuildActionViewModel(VersionComponent.Build, ActionMode.Increase, 1));
-				tempDebugBCVM.BuildActionVMs.Add(
-					VersionComponent.Revision,
-					new BuildActionViewModel(VersionComponent.Revision, ActionMode.TimeBased));
-				defaultCVM.BuildConfigVMs.Add("Debug", tempDebugBCVM);
-				BuildConfigurationViewModel tempReleaseBC = new BuildConfigurationViewModel();
-				tempReleaseBC.BuildActionVMs.Add(
-					VersionComponent.Major,
-					new BuildActionViewModel(VersionComponent.Major, ActionMode.Manual));
-				tempReleaseBC.BuildActionVMs.Add(
-					VersionComponent.Minor,
-					new BuildActionViewModel(VersionComponent.Minor, ActionMode.Increase, 1));
-				tempReleaseBC.BuildActionVMs.Add(
-					VersionComponent.Build,
-					new BuildActionViewModel(VersionComponent.Build, ActionMode.Increase, 1));
-				tempReleaseBC.BuildActionVMs.Add(
-					VersionComponent.Revision,
-					new BuildActionViewModel(VersionComponent.Revision, ActionMode.TimeBased));
-				defaultCVM.BuildConfigVMs.Add("Release", tempReleaseBC);
-				return defaultCVM;
+				return DefaultContents();
 			}
+		}
+
+		internal static ConfigViewModel DefaultContents() {
+			ConfigViewModel defaultCVM = new ConfigViewModel();
+			BuildConfigurationViewModel tempDebugBCVM = new BuildConfigurationViewModel();
+			tempDebugBCVM.BuildActionVMs.Add(
+				VersionComponent.Major,
+				new BuildActionViewModel(VersionComponent.Major, ActionMode.Manual));
+			tempDebugBCVM.BuildActionVMs.Add(
+				VersionComponent.Minor,
+				new BuildActionViewModel(VersionComponent.Minor, ActionMode.Manual));
+			tempDebugBCVM.BuildActionVMs.Add(
+				VersionComponent.Build,
+				new BuildActionViewModel(VersionComponent.Build, ActionMode.Increase, 1));
+			tempDebugBCVM.BuildActionVMs.Add(
+				VersionComponent.Revision,
+				new BuildActionViewModel(VersionComponent.Revision, ActionMode.Calculated));
+			defaultCVM.BuildConfigVMs.Add("Debug", tempDebugBCVM);
+			BuildConfigurationViewModel tempReleaseBC = new BuildConfigurationViewModel();
+			tempReleaseBC.BuildActionVMs.Add(
+				VersionComponent.Major,
+				new BuildActionViewModel(VersionComponent.Major, ActionMode.Manual));
+			tempReleaseBC.BuildActionVMs.Add(
+				VersionComponent.Minor,
+				new BuildActionViewModel(VersionComponent.Minor, ActionMode.Increase, 1));
+			tempReleaseBC.BuildActionVMs.Add(
+				VersionComponent.Build,
+				new BuildActionViewModel(VersionComponent.Build, ActionMode.Increase, 1));
+			tempReleaseBC.BuildActionVMs.Add(
+				VersionComponent.Revision,
+				new BuildActionViewModel(VersionComponent.Revision, ActionMode.Calculated));
+			defaultCVM.BuildConfigVMs.Add("Release", tempReleaseBC);
+			return defaultCVM;
 		}
 
 		private class Nested {

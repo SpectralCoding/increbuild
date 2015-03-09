@@ -84,13 +84,20 @@ namespace IncreBuild.Support {
 		Reset,
 
 		/// <summary>
-		/// Calculate a version value based on the current time.
+		/// Calculate a version value based a CalculationMethod.
 		/// </summary>
-		TimeBased,
+		Calculated,
 
 		/// <summary>
 		/// Do not change a version value.
 		/// </summary>
 		Manual
+	}
+
+	public enum CalculationMethod {
+		/// <summary>
+		/// The number of days since January 1st, 1970.
+		/// </summary>
+		DaysSinceEpoch
 	}
 }

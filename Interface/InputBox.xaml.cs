@@ -29,8 +29,10 @@ namespace IncreBuild.Interface {
 	/// Interaction logic for InputBox.xaml
 	/// </summary>
 	public partial class InputBox : Window {
-		public InputBox() {
+		public InputBox(String title, String description) {
 			this.InitializeComponent();
+			this.Title = title;
+			InputDescLbl.Content = description;
 		}
 
 		public event EventHandler<InputBoxEventArgs> RaiseCustomEvent;
@@ -61,6 +63,12 @@ namespace IncreBuild.Interface {
 
 		private void CancelBtn_Click(object sender, RoutedEventArgs e) {
 			this.Close();
+		}
+
+		private void InputFieldTxt_KeyDown(object sender, System.Windows.Input.KeyEventArgs e) {
+			if (e.Key == System.Windows.Input.Key.Enter) {
+				this.OKBtn_Click(null, null);
+			}
 		}
 	}
 }

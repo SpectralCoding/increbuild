@@ -29,5 +29,7 @@ namespace IncreBuild.Configuration {
 		public Int32 Delta { get; set; }
 
 		public ActionMode Mode { get; set; }
+
+		public CalculationMethod CalcMethod { get; set; }
 	}
 }

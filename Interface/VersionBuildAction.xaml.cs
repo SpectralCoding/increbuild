@@ -33,8 +33,8 @@ namespace IncreBuild.Interface {
 		}
 
 		private void VersionBuildAction_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e) {
-			Console.WriteLine("VBA DC: " + this.DataContext);
-			Console.WriteLine("VBA Txt DC: " + ValueTxt.DataContext);
+			////Console.WriteLine("VBA DC: " + this.DataContext);
+			////Console.WriteLine("VBA Txt DC: " + ValueTxt.DataContext);
 		}
 	}
 }

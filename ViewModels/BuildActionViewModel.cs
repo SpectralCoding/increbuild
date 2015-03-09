@@ -41,6 +41,11 @@ namespace IncreBuild.ViewModels {
 			this.Delta = actionDelta;
 		}
 
+		public BuildActionViewModel(VersionComponent versionComponent, ActionMode actionMode, CalculationMethod calcMethod)
+			: this(versionComponent, actionMode) {
+			this.CalcMethod = calcMethod;
+		}
+
 		[DataMember]
 		public Int32 Delta {
 			get {
@@ -64,7 +69,7 @@ namespace IncreBuild.ViewModels {
 					case ActionMode.Increase: return String.Format("Add {0}", this.Delta);
 					case ActionMode.Manual: return String.Format("Do Nothing", this.Delta);
 					case ActionMode.Reset: return String.Format("Set to 0", this.Delta);
-					case ActionMode.TimeBased: return String.Format("Set to a time-based number", this.Delta);
+					case ActionMode.Calculated: return String.Format("Set to a time-based number", this.Delta);
 					default: return "Unknown Action";
 				}
 			}
@@ -93,6 +98,21 @@ namespace IncreBuild.ViewModels {
 			set {
 				this.m_versionType = value;
 				this.OnPropertyChanged("VersionType");
+			}
+		}
+
+		[DataMember]
+		public CalculationMethod CalcMethod {
+			get {
+				return this.m_buildAction.CalcMethod;
+			}
+
+			set {
+				if (this.m_buildAction == null) {
+					this.m_buildAction = new BuildAction();
+				}
+				this.m_buildAction.CalcMethod = value;
+				this.OnPropertyChanged("CalcMethod");
 			}
 		}
 	}

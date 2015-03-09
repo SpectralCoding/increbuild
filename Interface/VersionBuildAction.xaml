@@ -12,12 +12,13 @@
 	<UserControl.Resources>
 		<converters:ActionModeEnumToString x:Key="ActionModeEnumToString" />
 		<converters:VersionComponentEnumToString x:Key="VersionComponentEnumToString" />
+		<converters:CalculationMethodEnumToString x:Key="CalculationMethodEnumToString" />
 	</UserControl.Resources>
 	<Grid>
 		<Label Content="{Binding VersionType, Converter={StaticResource VersionComponentEnumToString}}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Width="100" HorizontalContentAlignment="Center" FontWeight="Bold" Padding="0" Margin="5,5,0,0"/>
 		<Label Content="0" HorizontalAlignment="Left" Margin="5,34,0,0" VerticalAlignment="Top" FontSize="18" Width="100" HorizontalContentAlignment="Center" Padding="0"/>
 		<ComboBox x:Name="BuildAction" HorizontalAlignment="Left" Margin="5,63,0,0" VerticalAlignment="Top" Width="100"
-				  Text="{Binding Mode, Mode=TwoWay, Converter={StaticResource ActionModeEnumToString}}"
+				  Text="{Binding Path=Mode, Mode=TwoWay, Converter={StaticResource ActionModeEnumToString}}"
 				  SelectedIndex="0"
 				  >
 			<ComboBoxItem x:Name="IncreaseCBI" Content="Increase"/>
@@ -52,7 +53,7 @@
 				</Style>
 			</Label.Style>
 		</Label>
-		<TextBox x:Name="ValueTxt" HorizontalAlignment="Left" Height="23" Margin="5,111,0,0" TextWrapping="Wrap" Text="{Binding Delta, Mode=TwoWay}" VerticalAlignment="Top" Width="100" HorizontalContentAlignment="Center">
+		<TextBox x:Name="ValueTxt" HorizontalAlignment="Left" Height="23" Margin="5,111,0,0" TextWrapping="Wrap" Text="{Binding Path=Delta, Mode=TwoWay}" VerticalAlignment="Top" Width="100" HorizontalContentAlignment="Center">
 			<TextBox.Style>
 				<Style TargetType="TextBox">
 					<Setter Property="Visibility" Value="Visible" />
@@ -67,7 +68,9 @@
 				</Style>
 			</TextBox.Style>
 		</TextBox>
-		<ComboBox HorizontalAlignment="Left" Margin="5,111,0,0" VerticalAlignment="Top" Width="100">
+		<ComboBox HorizontalAlignment="Left" Margin="5,111,0,0" VerticalAlignment="Top" Width="100"
+				  Text="{Binding Path=CalcMethod, Mode=TwoWay, Converter={StaticResource CalculationMethodEnumToString}}"
+				  SelectedIndex="0">
 			<ComboBox.Style>
 				<Style TargetType="ComboBox">
 					<Setter Property="Visibility" Value="Hidden" />
