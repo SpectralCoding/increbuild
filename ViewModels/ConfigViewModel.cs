@@ -25,17 +25,18 @@ namespace IncreBuild.ViewModels {
 	using System.IO;
 	using System.Runtime.Serialization;
 	using System.Xml;
+	using DrWPF.Windows.Data;
 	using IncreBuild.Configuration;
 	using IncreBuild.Support;
 
 	[DataContract]
 	public sealed class ConfigViewModel : ViewModelBase {
-		private Dictionary<String, BuildConfigurationViewModel> m_buildConfigurationViewModels;
+		private ObservableDictionary<String, BuildConfigurationViewModel> m_buildConfigurationViewModels;
 		private Config m_config;
 
 		private ConfigViewModel() {
 			this.m_config = new Config();
-			this.m_buildConfigurationViewModels = new Dictionary<string, BuildConfigurationViewModel>();
+			this.m_buildConfigurationViewModels = new ObservableDictionary<string, BuildConfigurationViewModel>();
 		}
 
 		public static ConfigViewModel Instance {
@@ -44,10 +45,10 @@ namespace IncreBuild.ViewModels {
 		}
 
 		[DataMember]
-		public Dictionary<String, BuildConfigurationViewModel> BuildConfigVMs {
+		public ObservableDictionary<String, BuildConfigurationViewModel> BuildConfigVMs {
 			get {
 				return this.m_buildConfigurationViewModels ??
-					(this.m_buildConfigurationViewModels = new Dictionary<string, BuildConfigurationViewModel>());
+					(this.m_buildConfigurationViewModels = new ObservableDictionary<string, BuildConfigurationViewModel>());
 			}
 
 			set {

@@ -37,7 +37,6 @@ along with IncreBuild.  If not, see <http://www.gnu.org/licenses/>.
 		<ComboBox x:Name="BuildConfigCombo" Margin="120,10,170,0" VerticalAlignment="Top" SelectionChanged="BuildConfigCombo_SelectionChanged" ItemsSource="{Binding Path=BuildConfigVMs}" SelectedValuePath="Key" DisplayMemberPath="Key"/>
 		<Button x:Name="AddBuildConfigBtn" Content="Add" Margin="0,10,90,0" VerticalAlignment="Top" Height="22" HorizontalAlignment="Right" Width="75" Click="AddBuildConfigBtn_Click"/>
 		<Button x:Name="DeleteBuildConfigBtn" Content="Delete" Margin="0,10,10,0" VerticalAlignment="Top" Height="22" HorizontalAlignment="Right" Width="75" Click="DeleteBuildConfigBtn_Click"/>
-		<Button x:Name="ResetToDefaultsBtn" Content="Reset To Defaults" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="125" Click="ResetToDefaultsBtn_Click"/>
 		<Label Content="On Build" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" FontSize="18" Width="90" HorizontalContentAlignment="Center" FontWeight="Bold"/>
 		<Label Content="." HorizontalAlignment="Left" Margin="105,71,0,0" VerticalAlignment="Top" FontSize="18" Width="225" HorizontalContentAlignment="Center" Padding="0"/>
 		<Label Content="." HorizontalAlignment="Left" Margin="220,71,0,0" VerticalAlignment="Top" FontSize="18" Width="225" HorizontalContentAlignment="Center" Padding="0"/>
@@ -46,6 +45,5 @@ along with IncreBuild.  If not, see <http://www.gnu.org/licenses/>.
 		<local:VersionBuildAction x:Name="MinorVersion" Margin="220,37,0,48" HorizontalAlignment="Left" Width="110" Height="Auto" />
 		<local:VersionBuildAction x:Name="BuildVersion" Margin="335,37,0,48" HorizontalAlignment="Left" Width="110" Height="Auto" />
 		<local:VersionBuildAction x:Name="RevisionVersion" Margin="450,37,0,48" HorizontalAlignment="Left" Width="110" Height="Auto" />
-
 	</Grid>
 </Window>

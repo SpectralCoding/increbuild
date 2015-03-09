@@ -73,6 +73,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Support\InputBoxEventArgs.cs" />
     <Compile Include="Support\ObjectBase.cs" />
+    <Compile Include="Support\ObservableDictionary.cs" >
+		<ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+	</Compile>
     <Compile Include="Support\Structs.cs" />
     <Compile Include="Interface\VersionBuildAction.xaml.cs">
       <DependentUpon>VersionBuildAction.xaml</DependentUpon>

@@ -22,14 +22,16 @@
 namespace IncreBuild.Configuration {
 	using System.Collections.Generic;
 	using System.Runtime.Serialization;
+	using DrWPF.Windows.Data;
 	using IncreBuild.Support;
 
 	[DataContract]
 	public class BuildConfiguration {
 		[DataMember]
-		private Dictionary<VersionComponent, BuildAction> m_buildActions = new Dictionary<VersionComponent, BuildAction>();
+		private ObservableDictionary<VersionComponent, BuildAction> m_buildActions =
+			new ObservableDictionary<VersionComponent, BuildAction>();
 
-		public Dictionary<VersionComponent, BuildAction> BuildActions {
+		public ObservableDictionary<VersionComponent, BuildAction> BuildActions {
 			get { return this.m_buildActions; }
 		}
 	}

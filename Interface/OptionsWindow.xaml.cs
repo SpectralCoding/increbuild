@@ -68,31 +68,22 @@ namespace IncreBuild.Interface {
 				VersionComponent.Revision,
 				new BuildActionViewModel(VersionComponent.Revision, ActionMode.Manual));
 			ConfigViewModel.Instance.BuildConfigVMs.Add(e.InputText, tempNewBC);
-			ConfigViewModel.Instance.BuildConfigVMsChanged();
 			for (Int32 i = 0; i < BuildConfigCombo.Items.Count; i++) {
 				Console.WriteLine(((KeyValuePair<String, BuildConfigurationViewModel>)BuildConfigCombo.Items[i]).Key);
 				if (((KeyValuePair<String, BuildConfigurationViewModel>)BuildConfigCombo.Items[i]).Key == e.InputText) {
 					BuildConfigCombo.SelectedIndex = i;
-					////break;
+					break;
 				}
 			}
 		}
 
 		private void BuildConfigCombo_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-			////Console.WriteLine(BuildConfigCombo.SelectedValue);
-			if (BuildConfigCombo.SelectedValue != null) {
-				BuildConfigurationViewModel selectedBCVM =
-					ConfigViewModel.Instance.BuildConfigVMs[BuildConfigCombo.SelectedValue.ToString()];
-				MajorVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Major];
-				MinorVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Minor];
-				BuildVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Build];
-				RevisionVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Revision];
-			} else {
-				MajorVersion.DataContext = null;
-				MinorVersion.DataContext = null;
-				BuildVersion.DataContext = null;
-				RevisionVersion.DataContext = null;
-			}
+			BuildConfigurationViewModel selectedBCVM =
+				ConfigViewModel.Instance.BuildConfigVMs[BuildConfigCombo.SelectedValue.ToString()];
+			MajorVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Major];
+			MinorVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Minor];
+			BuildVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Build];
+			RevisionVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Revision];
 		}
 
 		private void CancelBtn_Click(object sender, RoutedEventArgs e) {
@@ -103,16 +94,6 @@ namespace IncreBuild.Interface {
 			String configToDelete = BuildConfigCombo.SelectedValue.ToString();
 			BuildConfigCombo.SelectedIndex = 0;
 			ConfigViewModel.Instance.BuildConfigVMs.Remove(configToDelete);
-			BuildConfigCombo.DataContext = null;
-			BuildConfigCombo.DataContext = ConfigViewModel.Instance;
-			BuildConfigCombo.SelectedIndex = 0;
-			ConfigViewModel.Instance.BuildConfigVMsChanged();
-		}
-
-		private void ResetToDefaultsBtn_Click(object sender, RoutedEventArgs e) {
-			ConfigViewModel.Instance = ConfigViewModel.DefaultContents();
-			this.DataContext = ConfigViewModel.Instance;
-			BuildConfigCombo.SelectedIndex = 0;
 		}
 	}
 }

@@ -22,21 +22,22 @@
 namespace IncreBuild.ViewModels {
 	using System.Collections.Generic;
 	using System.Runtime.Serialization;
+	using DrWPF.Windows.Data;
 	using IncreBuild.Support;
 
 	[DataContract]
 	public class BuildConfigurationViewModel : ViewModelBase {
-		private Dictionary<VersionComponent, BuildActionViewModel> m_buildActionViewModels;
+		private ObservableDictionary<VersionComponent, BuildActionViewModel> m_buildActionViewModels;
 
 		public BuildConfigurationViewModel() {
-			this.m_buildActionViewModels = new Dictionary<VersionComponent, BuildActionViewModel>();
+			this.m_buildActionViewModels = new ObservableDictionary<VersionComponent, BuildActionViewModel>();
 		}
 
 		[DataMember]
-		public Dictionary<VersionComponent, BuildActionViewModel> BuildActionVMs {
+		public ObservableDictionary<VersionComponent, BuildActionViewModel> BuildActionVMs {
 			get {
 				return this.m_buildActionViewModels ??
-					(this.m_buildActionViewModels = new Dictionary<VersionComponent, BuildActionViewModel>());
+					(this.m_buildActionViewModels = new ObservableDictionary<VersionComponent, BuildActionViewModel>());
 			}
 		}
 	}
