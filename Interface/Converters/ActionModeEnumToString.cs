@@ -19,10 +19,11 @@
 /// </license>
 /// <author>Caesar Kabalan</author>
 
-namespace IncreBuild.Support.Converters {
+namespace IncreBuild.Interface.Converters {
 	using System;
 	using System.Globalization;
 	using System.Windows.Data;
+	using IncreBuild.Support;
 
 	[ValueConversion(typeof(ActionMode), typeof(String))]
 	public class ActionModeEnumToString : IValueConverter {

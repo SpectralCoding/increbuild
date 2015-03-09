@@ -1,4 +1,4 @@
-﻿/// <copyright file="VersionBuildAction.cs" company="SpectralCoding.com">
+﻿/// <copyright file="InputBoxEventArgs.cs" company="SpectralCoding.com">
 ///     Copyright (c) 2015 SpectralCoding
 /// </copyright>
 /// <license>
@@ -19,22 +19,18 @@
 /// </license>
 /// <author>Caesar Kabalan</author>
 
-namespace IncreBuild.Interface {
+namespace IncreBuild.Interface.Support {
 	using System;
-	using System.Windows;
-	using System.Windows.Controls;
 
-	/// <summary>
-	/// Interaction logic for VersionBuildAction.xaml
-	/// </summary>
-	public partial class VersionBuildAction : UserControl {
-		public VersionBuildAction() {
-			this.InitializeComponent();
+	public class InputBoxEventArgs : EventArgs {
+		private string m_inputText;
+
+		public InputBoxEventArgs(string inputText) {
+			this.m_inputText = inputText;
 		}
 
-		private void VersionBuildAction_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e) {
-			////Console.WriteLine("VBA DC: " + this.DataContext);
-			////Console.WriteLine("VBA Txt DC: " + ValueTxt.DataContext);
+		public string InputText {
+			get { return this.m_inputText; }
 		}
 	}
 }

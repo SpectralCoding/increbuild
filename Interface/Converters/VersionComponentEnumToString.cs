@@ -1,4 +1,4 @@
-﻿/// <copyright file="CalculationMethodEnumToString.cs" company="SpectralCoding.com">
+﻿/// <copyright file="VersionComponentEnumToString.cs" company="SpectralCoding.com">
 ///     Copyright (c) 2015 SpectralCoding
 /// </copyright>
 /// <license>
@@ -19,26 +19,33 @@
 /// </license>
 /// <author>Caesar Kabalan</author>
 
-namespace IncreBuild.Support.Converters {
+namespace IncreBuild.Interface.Converters {
 	using System;
 	using System.Globalization;
 	using System.Windows.Data;
+	using IncreBuild.Support;
 
 	[ValueConversion(typeof(VersionComponent), typeof(String))]
-	public class CalculationMethodEnumToString : IValueConverter {
+	public class VersionComponentEnumToString : IValueConverter {
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
-			CalculationMethod calcMethodEnum = (CalculationMethod)value;
-			switch (calcMethodEnum) {
-				case CalculationMethod.DaysSinceEpoch: return "Epoch";
+			VersionComponent versionComponentEnum = (VersionComponent)value;
+			switch (versionComponentEnum) {
+				case VersionComponent.Major: return "Major";
+				case VersionComponent.Minor: return "Minor";
+				case VersionComponent.Build: return "Build";
+				case VersionComponent.Revision: return "Revision";
 				default: return null;
 			}
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
 			// We really shouldn't even need this because it only ends up in an unchangable label.
-			string calcMethodString = (string)value;
-			switch (calcMethodString) {
-				case "Epoch": return CalculationMethod.DaysSinceEpoch;
+			string versionComponentString = (string)value;
+			switch (versionComponentString) {
+				case "Major": return VersionComponent.Major;
+				case "Minor": return VersionComponent.Minor;
+				case "Build": return VersionComponent.Build;
+				case "Revision": return VersionComponent.Revision;
 				default: return null;
 			}
 		}

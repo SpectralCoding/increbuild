@@ -19,10 +19,10 @@
 /// </license>
 /// <author>Caesar Kabalan</author>
 
-namespace IncreBuild.Interface {
+namespace IncreBuild.Interface.VisualElements {
 	using System;
 	using System.Windows;
-	using IncreBuild.Support;
+	using IncreBuild.Interface.Support;
 	using IncreBuild.ViewModels;
 
 	/// <summary>

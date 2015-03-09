@@ -23,6 +23,7 @@ namespace IncreBuild.ViewModels {
 	using System;
 	using System.Runtime.Serialization;
 	using IncreBuild.Configuration;
+	using IncreBuild.Interface.Support;
 	using IncreBuild.Support;
 
 	[DataContract]

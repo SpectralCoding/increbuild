@@ -23,7 +23,7 @@ namespace IncreBuild {
 	using System;
 	using System.Collections.Generic;
 	using System.Windows;
-	using IncreBuild.Interface;
+	using IncreBuild.Interface.VisualElements;
 	using IncreBuild.Support;
 	using IncreBuild.ViewModels;
 

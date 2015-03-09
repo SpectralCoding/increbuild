@@ -59,25 +59,25 @@
     <Compile Include="Configuration\BuildAction.cs" />
     <Compile Include="Configuration\BuildConfiguration.cs" />
     <Compile Include="Configuration\Config.cs" />
-    <Compile Include="Support\Converters\ActionModeEnumToString.cs" />
-    <Compile Include="Support\Converters\CalculationMethodEnumToString.cs" />
-    <Compile Include="Support\Converters\VersionComponentEnumToString.cs" />
+    <Compile Include="Interface\Converters\ActionModeEnumToString.cs" />
+    <Compile Include="Interface\Converters\CalculationMethodEnumToString.cs" />
+    <Compile Include="Interface\Converters\VersionComponentEnumToString.cs" />
     <Compile Include="Support\Enumerations.cs" />
-    <Compile Include="Interface\InputBox.xaml.cs">
+    <Compile Include="Interface\VisualElements\InputBox.xaml.cs">
       <DependentUpon>InputBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Interface\OptionsWindow.xaml.cs">
+    <Compile Include="Interface\VisualElements\OptionsWindow.xaml.cs">
       <DependentUpon>OptionsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Support\InputBoxEventArgs.cs" />
+    <Compile Include="Interface\Support\InputBoxEventArgs.cs" />
     <Compile Include="Support\ObjectBase.cs" />
-    <Compile Include="Support\ObservableDictionary.cs" >
-		<ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-	</Compile>
+    <Compile Include="Support\ObservableDictionary.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Support\Structs.cs" />
-    <Compile Include="Interface\VersionBuildAction.xaml.cs">
+    <Compile Include="Interface\VisualElements\VersionBuildAction.xaml.cs">
       <DependentUpon>VersionBuildAction.xaml</DependentUpon>
     </Compile>
     <Compile Include="Support\ViewModelBase.cs" />
@@ -90,15 +90,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Interface\InputBox.xaml">
+    <Page Include="Interface\VisualElements\InputBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Interface\OptionsWindow.xaml">
+    <Page Include="Interface\VisualElements\OptionsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Interface\VersionBuildAction.xaml">
+    <Page Include="Interface\VisualElements\VersionBuildAction.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
