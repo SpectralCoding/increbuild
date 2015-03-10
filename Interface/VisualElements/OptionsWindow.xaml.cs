@@ -69,6 +69,9 @@ namespace IncreBuild.Interface.VisualElements {
 			tempNewBC.BuildActionVMs.Add(
 				VersionComponent.Revision,
 				new BuildActionViewModel(VersionComponent.Revision, ActionMode.Manual));
+			tempNewBC.UpdateAsmVer = false;
+			tempNewBC.UpdateAsmFileVer = true;
+			tempNewBC.UpdateAsmInfoVer = true;
 			ConfigViewModel.Instance.BuildConfigVMs.Add(e.InputText, tempNewBC);
 			for (Int32 i = 0; i < BuildConfigCombo.Items.Count; i++) {
 				Console.WriteLine(((KeyValuePair<String, BuildConfigurationViewModel>)BuildConfigCombo.Items[i]).Key);
@@ -86,6 +89,9 @@ namespace IncreBuild.Interface.VisualElements {
 			MinorVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Minor];
 			BuildVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Build];
 			RevisionVersion.DataContext = selectedBCVM.BuildActionVMs[VersionComponent.Revision];
+			AsmVerChk.DataContext = selectedBCVM;
+			AsmFileVerChk.DataContext = selectedBCVM;
+			AsmInfoVerChk.DataContext = selectedBCVM;
 		}
 
 		private void CancelBtn_Click(object sender, RoutedEventArgs e) {
@@ -99,17 +105,41 @@ namespace IncreBuild.Interface.VisualElements {
 		}
 
 		private void ExplainAsmVerLbl_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
-			MoreInfoBox explainBox = new MoreInfoBox("Explain: AssemblyVersion", "Explain: AssemblyVersion", ExplainStrings.AssemblyVersionExplainBody, @"http://www.danielfortunov.com/software/%24daniel_fortunovs_adventures_in_software_development/2009/03/03/assembly_versioning_in_net", 750, 393);
+			String sourceURL = @"http://www.danielfortunov.com/software/" +
+				@"%24daniel_fortunovs_adventures_in_software_development/2009/03/03/assembly_versioning_in_net";
+			MoreInfoBox explainBox = new MoreInfoBox(
+				"Explain: AssemblyVersion",
+				"Explain: AssemblyVersion",
+				ExplainStrings.AssemblyVersionExplainBody,
+				sourceURL,
+				750,
+				393);
 			explainBox.Show();
 		}
 
 		private void ExplainAsmFileVerLbl_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
-			MoreInfoBox explainBox = new MoreInfoBox("Explain: AssemblyFileVersion", "Explain: AssemblyFileVersion", ExplainStrings.AssemblyFileVersionExplainBody, @"http://www.danielfortunov.com/software/%24daniel_fortunovs_adventures_in_software_development/2009/03/03/assembly_versioning_in_net", 750, 300);
+			String sourceURL = @"http://www.danielfortunov.com/software/" +
+				@"%24daniel_fortunovs_adventures_in_software_development/2009/03/03/assembly_versioning_in_net";
+			MoreInfoBox explainBox = new MoreInfoBox(
+				"Explain: AssemblyFileVersion",
+				"Explain: AssemblyFileVersion",
+				ExplainStrings.AssemblyFileVersionExplainBody,
+				sourceURL,
+				750,
+				300);
 			explainBox.Show();
 		}
 
 		private void ExplainAsmInfoVerLbl_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
-			MoreInfoBox explainBox = new MoreInfoBox("Explain: AssemblyInformationalVersion", "Explain: AssemblyInformationalVersion", ExplainStrings.AssemblyInformationalVersionExplainBody, @"http://www.danielfortunov.com/software/%24daniel_fortunovs_adventures_in_software_development/2009/03/03/assembly_versioning_in_net", 750, 350);
+			String sourceURL = @"http://www.danielfortunov.com/software/" +
+				@"%24daniel_fortunovs_adventures_in_software_development/2009/03/03/assembly_versioning_in_net";
+			MoreInfoBox explainBox = new MoreInfoBox(
+				"Explain: AssemblyInformationalVersion",
+				"Explain: AssemblyInformationalVersion",
+				ExplainStrings.AssemblyInformationalVersionExplainBody,
+				sourceURL,
+				750,
+				350);
 			explainBox.Show();
 		}
 	}

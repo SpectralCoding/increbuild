@@ -24,10 +24,6 @@ namespace IncreBuild.Engine {
 	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
-	using IncreBuild.ViewModels;
-	using IncreBuild.Support;
 
 	public class AsmInfoManipulator {
 		private List<String> m_asmInfoContents = new List<String>();

@@ -45,17 +45,17 @@ along with IncreBuild.  If not, see <http://www.gnu.org/licenses/>.
 		<local:VersionBuildAction x:Name="MinorVersion" Margin="220,37,0,0" HorizontalAlignment="Left" Width="110" Height="140" VerticalAlignment="Top" />
 		<local:VersionBuildAction x:Name="BuildVersion" Margin="335,37,0,0" HorizontalAlignment="Left" Width="110" Height="140" VerticalAlignment="Top" />
 		<local:VersionBuildAction x:Name="RevisionVersion" Margin="450,37,0,0" HorizontalAlignment="Left" Width="110" Height="140" VerticalAlignment="Top" />
-		<Label Content="Update" HorizontalAlignment="Left" Margin="10,0,0,44" VerticalAlignment="Bottom" FontSize="18" Width="90" HorizontalContentAlignment="Center" FontWeight="Bold"/>
-		<CheckBox x:Name="checkBox" Content="AssemblyFileVersion" HorizontalAlignment="Left" Margin="109,0,0,31" VerticalAlignment="Bottom"/>
-		<CheckBox x:Name="checkBox_Copy" Content="AssemblyInformationalVersion" HorizontalAlignment="Left" Margin="109,0,0,11" Height="15" VerticalAlignment="Bottom"/>
-		<CheckBox x:Name="checkBox_Copy1" Content="AssemblyVersion" HorizontalAlignment="Left" Margin="109,0,0,51" VerticalAlignment="Bottom"/>
 		<Label x:Name="label" Content="" Margin="105,162,10,0" BorderThickness="0,0,0,1" BorderBrush="Black" Padding="0" Height="17" VerticalAlignment="Top"/>
+		<Label Content="Update" HorizontalAlignment="Left" Margin="10,0,0,44" VerticalAlignment="Bottom" FontSize="18" Width="90" HorizontalContentAlignment="Center" FontWeight="Bold"/>
+		<CheckBox x:Name="AsmVerChk" Content="AssemblyVersion" HorizontalAlignment="Left" Margin="109,0,0,51" VerticalAlignment="Bottom" IsChecked="{Binding Path=UpdateAsmVer}"/>
 		<Label x:Name="ExplainAsmVerLbl" Tag="Explain" HorizontalAlignment="Left" Margin="224,0,0,51" Padding="0" Foreground="#FF0000EE" Height="16" VerticalAlignment="Bottom" MouseDown="ExplainAsmVerLbl_MouseDown">
 			<TextBlock TextDecorations="Underline" Text="{Binding Path=Tag, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Label}}}" />
 		</Label>
+		<CheckBox x:Name="AsmFileVerChk" Content="AssemblyFileVersion" HorizontalAlignment="Left" Margin="109,0,0,31" VerticalAlignment="Bottom" IsChecked="{Binding Path=UpdateAsmFileVer}"/>
 		<Label x:Name="ExplainAsmFileVerLbl" Tag="Explain" HorizontalAlignment="Left" Margin="242,0,0,31" Padding="0" Foreground="#FF0000EE" Height="16" VerticalAlignment="Bottom" MouseDown="ExplainAsmFileVerLbl_MouseDown">
 			<TextBlock TextDecorations="Underline" Text="{Binding Tag, RelativeSource={RelativeSource AncestorType={x:Type Label}, Mode=FindAncestor}}" />
 		</Label>
+		<CheckBox x:Name="AsmInfoVerChk" Content="AssemblyInformationalVersion" HorizontalAlignment="Left" Margin="109,0,0,11" Height="15" VerticalAlignment="Bottom" IsChecked="{Binding Path=UpdateAsmInfoVer}"/>
 		<Label x:Name="ExplainAsmInfoVerLbl" Tag="Explain" HorizontalAlignment="Left" Margin="293,0,0,11" Padding="0" Foreground="#FF0000EE" Height="16" VerticalAlignment="Bottom" MouseDown="ExplainAsmInfoVerLbl_MouseDown">
 			<TextBlock TextDecorations="Underline" Text="{Binding Tag, RelativeSource={RelativeSource AncestorType={x:Type Label}, Mode=FindAncestor}}" />
 		</Label>

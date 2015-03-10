@@ -30,7 +30,7 @@ namespace IncreBuild.Engine {
 
 	public class VersionEngine {
 		public void Run(String projectDir, String releaseType) {
-			AsmInfoManipulator AsmIM = new AsmInfoManipulator(this.FindAsmInfo(projectDir));
+			AsmInfoManipulator asmIM = new AsmInfoManipulator(this.FindAsmInfo(projectDir));
 		}
 
 		private String FindAsmInfo(String projectDir) {

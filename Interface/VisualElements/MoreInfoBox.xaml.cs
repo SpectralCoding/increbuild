@@ -34,7 +34,8 @@ namespace IncreBuild.Interface.VisualElements {
 	public partial class MoreInfoBox : Window {
 		private String m_fullSourceLink = String.Empty;
 
-		public MoreInfoBox(String windowTitle, String pageTitle, String pageContent, String sourceLink, Int32 windowWidth, Int32 windowHeight) {
+		public MoreInfoBox(
+			String windowTitle, String pageTitle, String pageContent, String sourceLink, Int32 windowWidth, Int32 windowHeight) {
 			this.InitializeComponent();
 			this.Width = windowWidth;
 			this.Height = windowHeight;
@@ -43,11 +44,15 @@ namespace IncreBuild.Interface.VisualElements {
 			this.ContentsLbl.Content = pageContent;
 			this.m_fullSourceLink = sourceLink;
 			using (Graphics tempGraphic = Graphics.FromImage(new Bitmap(1, 1))) {
-				SizeF strSize = tempGraphic.MeasureString(this.m_fullSourceLink, new Font("Segoe UI", 9, System.Drawing.FontStyle.Regular, GraphicsUnit.Point));
+				SizeF strSize = tempGraphic.MeasureString(
+					this.m_fullSourceLink,
+					new Font("Segoe UI", 9, System.Drawing.FontStyle.Regular, GraphicsUnit.Point));
 				// 64 Pixels represents the side margins of the Source "link" label.
 				if (strSize.Width > this.Width - 64) {
 					for (Int32 i = this.m_fullSourceLink.Length; i > 0; i--) {
-						strSize = tempGraphic.MeasureString(this.m_fullSourceLink.Substring(0, i) + "...", new Font("Segoe UI", 9, System.Drawing.FontStyle.Regular, GraphicsUnit.Point));
+						strSize = tempGraphic.MeasureString(
+							this.m_fullSourceLink.Substring(0, i) + "...",
+							new Font("Segoe UI", 9, System.Drawing.FontStyle.Regular, GraphicsUnit.Point));
 						if (strSize.Width <= (this.Width - 64)) {
 							this.SourceLbl.Tag = sourceLink.Substring(0, i) + "...";
 							Console.WriteLine(this.SourceLbl.Tag);
@@ -58,8 +63,6 @@ namespace IncreBuild.Interface.VisualElements {
 					this.SourceLbl.Tag = sourceLink;
 				}
 			}
-
-
 		}
 
 		private void SourceLbl_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {

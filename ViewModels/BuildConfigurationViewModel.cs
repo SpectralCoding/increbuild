@@ -20,6 +20,7 @@
 /// <author>Caesar Kabalan</author>
 
 namespace IncreBuild.ViewModels {
+	using System;
 	using System.Collections.Generic;
 	using System.Runtime.Serialization;
 	using DrWPF.Windows.Data;
@@ -29,6 +30,9 @@ namespace IncreBuild.ViewModels {
 	[DataContract]
 	public class BuildConfigurationViewModel : ViewModelBase {
 		private ObservableDictionary<VersionComponent, BuildActionViewModel> m_buildActionViewModels;
+		private Boolean m_updateAsmVer;
+		private Boolean m_updateAsmFileVer;
+		private Boolean m_updateAsmInfoVer;
 
 		public BuildConfigurationViewModel() {
 			this.m_buildActionViewModels = new ObservableDictionary<VersionComponent, BuildActionViewModel>();
@@ -39,6 +43,42 @@ namespace IncreBuild.ViewModels {
 			get {
 				return this.m_buildActionViewModels ??
 					(this.m_buildActionViewModels = new ObservableDictionary<VersionComponent, BuildActionViewModel>());
+			}
+		}
+
+		[DataMember]
+		public Boolean UpdateAsmVer {
+			get {
+				return this.m_updateAsmVer;
+			}
+
+			set {
+				this.m_updateAsmVer = value;
+				this.OnPropertyChanged("UpdateAsmVer");
+			}
+		}
+
+		[DataMember]
+		public Boolean UpdateAsmFileVer {
+			get {
+				return this.m_updateAsmFileVer;
+			}
+
+			set {
+				this.m_updateAsmFileVer = value;
+				this.OnPropertyChanged("UpdateAsmFileVer");
+			}
+		}
+
+		[DataMember]
+		public Boolean UpdateAsmInfoVer {
+			get {
+				return this.m_updateAsmInfoVer;
+			}
+
+			set {
+				this.m_updateAsmInfoVer = value;
+				this.OnPropertyChanged("UpdateAsmInfoVer");
 			}
 		}
 	}

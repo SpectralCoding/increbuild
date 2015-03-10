@@ -124,21 +124,27 @@ namespace IncreBuild.ViewModels {
 			tempDebugBCVM.BuildActionVMs.Add(
 				VersionComponent.Revision,
 				new BuildActionViewModel(VersionComponent.Revision, ActionMode.Calculated));
+			tempDebugBCVM.UpdateAsmVer = false;
+			tempDebugBCVM.UpdateAsmFileVer = true;
+			tempDebugBCVM.UpdateAsmInfoVer = true;
 			defaultCVM.BuildConfigVMs.Add("Debug", tempDebugBCVM);
-			BuildConfigurationViewModel tempReleaseBC = new BuildConfigurationViewModel();
-			tempReleaseBC.BuildActionVMs.Add(
+			BuildConfigurationViewModel tempReleaseBCVM = new BuildConfigurationViewModel();
+			tempReleaseBCVM.BuildActionVMs.Add(
 				VersionComponent.Major,
 				new BuildActionViewModel(VersionComponent.Major, ActionMode.Manual));
-			tempReleaseBC.BuildActionVMs.Add(
+			tempReleaseBCVM.BuildActionVMs.Add(
 				VersionComponent.Minor,
 				new BuildActionViewModel(VersionComponent.Minor, ActionMode.Increase, 1));
-			tempReleaseBC.BuildActionVMs.Add(
+			tempReleaseBCVM.BuildActionVMs.Add(
 				VersionComponent.Build,
 				new BuildActionViewModel(VersionComponent.Build, ActionMode.Increase, 1));
-			tempReleaseBC.BuildActionVMs.Add(
+			tempReleaseBCVM.BuildActionVMs.Add(
 				VersionComponent.Revision,
 				new BuildActionViewModel(VersionComponent.Revision, ActionMode.Calculated));
-			defaultCVM.BuildConfigVMs.Add("Release", tempReleaseBC);
+			tempReleaseBCVM.UpdateAsmVer = true;
+			tempReleaseBCVM.UpdateAsmFileVer = true;
+			tempReleaseBCVM.UpdateAsmInfoVer = true;
+			defaultCVM.BuildConfigVMs.Add("Release", tempReleaseBCVM);
 			return defaultCVM;
 		}
 
