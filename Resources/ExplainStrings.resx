@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AssemblyFileVersionExplainBody" xml:space="preserve">
+    <value>- IncreBuild Says: This is the attribute which is displayed in the Windows Explorer property page, and translates to the "File version" box
+   in the "Assemply Information" window in the Project Properties "Application" tab. Most of the time this is the best attribute to reflect
+   a unique version that changes every time the binary is rebuilt. Suggest automatic updating every build.
+
+Typically you’ll manually set the Major and Minor AssemblyFileVersion to reflect the version of the assembly, then increment the Build
+and/or Revision every time your build system compiles the assembly. The AssemblyFileVersion should allow you to uniquely identify a
+build of the assembly, so that you can use it as a starting point for debugging any problems.
+
+This version number is stored in the Win32 version resource and can be seen when viewing the Windows Explorer property pages for
+the assembly.
+
+The CLR does not care about nor examine the AssemblyFileVersion.</value>
+  </data>
+  <data name="AssemblyInformationalVersionExplainBody" xml:space="preserve">
+    <value>- IncreBuild Says: This should be representative of an entire product release and would match marketing materials, applications
+   updates, etc. To effectively use this attribute (which is __NOT__ required) you would create specific Build Configs for building a
+   release version of the product. These Build configs would have Major/Minor set to Manual and Build/Revision set to taste.
+
+The AssemblyInformationalVersion is intended to allow coherent versioning of the entire product, which may consist of many
+assemblies that are independently versioned, perhaps with differing versioning policies, and potentially developed by disparate
+teams.
+
+“For example, version 2.0 of a product might contain several assemblies; one of these assemblies is marked as version 1.0 since it’s a
+new assembly that didn’t ship in version 1.0 of the same product. Typically, you set the major and minor parts of this version number
+to represent the public version of your product. Then you increment the build and revision parts each time you package a complete
+product with all its assemblies.”
+    - Jeffrey Richter, CLR via C# (Second Edition) p. 57
+
+The CLR does not care about nor examine the AssemblyInformationalVersion.</value>
+  </data>
+  <data name="AssemblyVersionExplainBody" xml:space="preserve">
+    <value>- IncreBuild Says: If you're working alone on a project, it won't matter if this is attribute is changed. If you work on a team or send
+   code to other developers then read below carefully to determine when you want to break compatibility. Suggest set to Manual.
+
+The AssemblyVersion is used by the CLR to bind to strongly named assemblies. It is stored in the AssemblyDef manifest metadata
+table of the built assembly, and in the AssemblyRef table of any assembly that references it.
+
+This is very important, because it means that when you reference a strongly named assembly, you are tightly bound to a specific
+AssemblyVersion of that assembly. The entire AssemblyVersion must be an exact match for the binding to succeed. For example, if you
+reference version 1.0.0.0 of a strongly named assembly at build-time, but only version 1.0.0.1 of that assembly is available at runtime,
+binding will fail! (You will then have to work around this using Assembly Binding Redirection.)
+
+The moral is that if you’re shipping assemblies that other developers are going to be referencing, you need to be extremely careful
+about when you do (and don’t) change the AssemblyVersion of those assemblies. Any changes to the AssemblyVersion will mean that
+application developers will either have to re-compile against the new version (to update those AssemblyRef entries) or use assembly
+binding redirects to manually override the binding.
+
+- Do not change the AssemblyVersion for a servicing release which is intended to be backwards compatible.
+- Do change the AssemblyVersion for a release that you know has breaking changes.</value>
+  </data>
+</root>

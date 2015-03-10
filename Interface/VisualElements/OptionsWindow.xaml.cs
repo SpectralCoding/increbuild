@@ -26,6 +26,7 @@ namespace IncreBuild.Interface.VisualElements {
 	using System.Windows;
 	using System.Windows.Controls;
 	using IncreBuild.Interface.Support;
+	using IncreBuild.Resources;
 	using IncreBuild.Support;
 	using IncreBuild.ViewModels;
 
@@ -95,6 +96,21 @@ namespace IncreBuild.Interface.VisualElements {
 			String configToDelete = BuildConfigCombo.SelectedValue.ToString();
 			BuildConfigCombo.SelectedIndex = 0;
 			ConfigViewModel.Instance.BuildConfigVMs.Remove(configToDelete);
+		}
+
+		private void ExplainAsmVerLbl_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+			MoreInfoBox explainBox = new MoreInfoBox("Explain: AssemblyVersion", "Explain: AssemblyVersion", ExplainStrings.AssemblyVersionExplainBody, @"http://www.danielfortunov.com/software/%24daniel_fortunovs_adventures_in_software_development/2009/03/03/assembly_versioning_in_net", 750, 393);
+			explainBox.Show();
+		}
+
+		private void ExplainAsmFileVerLbl_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+			MoreInfoBox explainBox = new MoreInfoBox("Explain: AssemblyFileVersion", "Explain: AssemblyFileVersion", ExplainStrings.AssemblyFileVersionExplainBody, @"http://www.danielfortunov.com/software/%24daniel_fortunovs_adventures_in_software_development/2009/03/03/assembly_versioning_in_net", 750, 300);
+			explainBox.Show();
+		}
+
+		private void ExplainAsmInfoVerLbl_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+			MoreInfoBox explainBox = new MoreInfoBox("Explain: AssemblyInformationalVersion", "Explain: AssemblyInformationalVersion", ExplainStrings.AssemblyInformationalVersionExplainBody, @"http://www.danielfortunov.com/software/%24daniel_fortunovs_adventures_in_software_development/2009/03/03/assembly_versioning_in_net", 750, 350);
+			explainBox.Show();
 		}
 	}
 }

@@ -28,7 +28,7 @@ along with IncreBuild.  If not, see <http://www.gnu.org/licenses/>.
 		Height="126"
 		Width="487"
 		Icon="pack://application:,,,/Resources/Info.ico"
-		FocusManager.FocusedElement="{Binding ElementName=InputFieldTxt}">
+		FocusManager.FocusedElement="{Binding ElementName=InputFieldTxt}" WindowStartupLocation="CenterScreen">
 	<Grid>
 		<Button x:Name="OKBtn" Content="OK" HorizontalAlignment="Right" Margin="0,59,90,0" VerticalAlignment="Top" Width="75" Click="OKBtn_Click"/>
 		<Button x:Name="CancelBtn" Content="Cancel" Margin="394,59,10,0" VerticalAlignment="Top" Click="CancelBtn_Click"/>

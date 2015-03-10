@@ -44,6 +44,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Xaml" />
@@ -57,6 +58,14 @@
   <ItemGroup>
     <Compile Include="Engine\AsmInfoManipulator.cs" />
     <Compile Include="Engine\VersionEngine.cs" />
+    <Compile Include="Interface\VisualElements\MoreInfoBox.xaml.cs">
+      <DependentUpon>MoreInfoBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ExplainStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExplainStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Support\ArgumentParser.cs" />
     <Compile Include="Configuration\BuildAction.cs" />
     <Compile Include="Configuration\BuildConfiguration.cs" />
@@ -92,6 +101,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Interface\VisualElements\MoreInfoBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Interface\VisualElements\InputBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -114,7 +127,12 @@
   <ItemGroup>
     <Resource Include="Resources\Info.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExplainStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExplainStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>if $(ConfigurationName)==Debug "$(SolutionDir)\_External\IncreBuild.exe" DEBUG "$(ProjectDir)"
